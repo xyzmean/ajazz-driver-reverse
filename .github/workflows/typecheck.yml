@@ -3,10 +3,10 @@ name: Typecheck reverse driver
 on:
   push:
     branches:
-      - reverse
+      - main
   pull_request:
     branches:
-      - reverse
+      - main
     # verifies auto-PRs that regenerate models.ts/models.json from a new artifact
   workflow_dispatch:
 
