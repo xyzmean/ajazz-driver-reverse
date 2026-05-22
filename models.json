@@ -1,6 +1,22 @@
 [
   {
     "vendorId": 3141,
+    "productId": 32777,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "USB",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "both"
+  },
+  {
+    "vendorId": 3141,
     "productId": 32778,
     "name": "820PRO",
     "supplierName": "ajazz",
@@ -12,7 +28,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "AK820.png"
+    "keyboardImg": "AK820.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -27,7 +44,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "AK820.png"
+    "keyboardImg": "AK820.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -43,7 +61,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AJAZZ_AK029.png"
+    "keyboardImg": "AJAZZ_AK029.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -59,7 +78,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AJAZZ_AK029.png"
+    "keyboardImg": "AJAZZ_AK029.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -75,7 +95,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AJAZZ_AK029.png"
+    "keyboardImg": "AJAZZ_AK029.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -91,7 +112,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AJAZZ_AK038.png"
+    "keyboardImg": "AJAZZ_AK038.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -107,7 +129,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AJAZZ_AK038.png"
+    "keyboardImg": "AJAZZ_AK038.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -123,7 +146,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK680MAX.png"
+    "keyboardImg": "AK680MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -139,7 +163,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK680MAX_D.png"
+    "keyboardImg": "AK680MAX_D.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -155,7 +180,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK680_V2.png"
+    "keyboardImg": "AK680_V2.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -171,7 +197,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK680_V2.png"
+    "keyboardImg": "AK680_V2.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -187,7 +214,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK680_V2.png"
+    "keyboardImg": "AK680_V2.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -203,7 +231,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -218,7 +247,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": null
+    "keyboardImg": null,
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -234,7 +264,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": null
+    "keyboardImg": null,
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -248,7 +279,8 @@
       "macro",
       "settings"
     ],
-    "keyboardImg": "AK980_PRO.png"
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -264,7 +296,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "kb_bg.png"
+    "keyboardImg": "kb_bg.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -280,7 +313,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "kb_bg.png"
+    "keyboardImg": "kb_bg.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -295,7 +329,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "AK820.png"
+    "keyboardImg": "AK820.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -310,7 +345,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "AK820.png"
+    "keyboardImg": "AK820.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -325,7 +361,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "AK820_US.png"
+    "keyboardImg": "AK820_US.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -340,7 +377,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "kb_bg.png"
+    "keyboardImg": "kb_bg.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -356,7 +394,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -372,7 +411,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -388,7 +428,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -403,7 +444,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -419,7 +461,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -435,7 +478,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -451,7 +495,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK820MAX.png"
+    "keyboardImg": "AK820MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -465,7 +510,8 @@
       "macro",
       "settings"
     ],
-    "keyboardImg": "AK870MC.png"
+    "keyboardImg": "AK870MC.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -481,7 +527,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK980_MAX.png"
+    "keyboardImg": "AK980_MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -497,7 +544,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK980_MAX.png"
+    "keyboardImg": "AK980_MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -513,7 +561,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK980_MAX.png"
+    "keyboardImg": "AK980_MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -529,7 +578,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK980_MAX.png"
+    "keyboardImg": "AK980_MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -545,7 +595,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK980_MAX.png"
+    "keyboardImg": "AK980_MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -561,22 +612,8 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "AK980_MAX.png"
-  },
-  {
-    "vendorId": 3141,
-    "productId": 32777,
-    "name": "AK980 PRO",
-    "supplierName": "ajazz",
-    "connectType": "USB",
-    "routesName": [
-      "customKeys",
-      "lighting",
-      "macro",
-      "tft",
-      "settings"
-    ],
-    "keyboardImg": "AK980_PRO.png"
+    "keyboardImg": "AK980_MAX.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -591,7 +628,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "AK980_PRO.png"
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -606,7 +644,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "AK980_PRO.png"
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -623,7 +662,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "kb_bg.png"
+    "keyboardImg": "kb_bg.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -640,7 +680,8 @@
       "tft",
       "settings"
     ],
-    "keyboardImg": "MJ84+.png"
+    "keyboardImg": "MJ84+.png",
+    "driverSource": "driveall"
   },
   {
     "vendorId": 3141,
@@ -656,6 +697,75 @@
       "advancedKeys",
       "settings"
     ],
-    "keyboardImg": "qs87.png"
+    "keyboardImg": "qs87.png",
+    "driverSource": "driveall"
+  },
+  {
+    "vendorId": 3141,
+    "productId": 32774,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "USB",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "hub",
+    "deviceMode": 0
+  },
+  {
+    "vendorId": 3141,
+    "productId": 32790,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "2.4G",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "hub",
+    "deviceMode": 0
+  },
+  {
+    "vendorId": 3141,
+    "productId": 32835,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "USB",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "hub",
+    "deviceMode": 0
+  },
+  {
+    "vendorId": 3141,
+    "productId": 32839,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "2.4G",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "hub",
+    "deviceMode": 0
   }
 ]
