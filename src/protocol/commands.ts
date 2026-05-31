@@ -13,7 +13,7 @@ import { CMD, FactoryResetType, REPORT_ID, transfer, concatPayload, buildPacket,
 
 const timeoutFor = (frameVersion?: number) => (frameVersion === 1 ? 2000 : 500);
 
-// ─── Game mode / global settings ── minified getGameMode `Re` / setGameMode `qe`
+// ─── Game mode / global settings ── minified getGameMode `Re` / setGameMode `Je`
 // 56-byte payload.
 
 export interface GameMode {
@@ -30,10 +30,11 @@ export interface GameMode {
   stabilityMode: number;
   autoCalibration: number;
   singleKeyWakeup: number;
+  pushButtonMode: number;
 }
 
 export async function getGameMode(device: HIDDevice, frameVersion?: number): Promise<GameMode> {
-  const o = concatPayload(
+  const o = concatPayload( 
     await transfer(device, { cmd: CMD.GET_GAME_MODE, contentSize: 56, timeout: timeoutFor(frameVersion) }),
     56,
   );
@@ -50,6 +51,7 @@ export async function getGameMode(device: HIDDevice, frameVersion?: number): Pro
     stabilityMode: o[11],
     autoCalibration: o[14],
     singleKeyWakeup: o[15],
+    pushButtonMode: o[16],
   };
 }
 
@@ -67,6 +69,7 @@ export async function setGameMode(device: HIDDevice, v: GameMode, frameVersion?:
   e[11] = v.stabilityMode || 0;
   e[14] = v.autoCalibration || 0;
   e[15] = v.singleKeyWakeup || 0;
+  e[16] = v.pushButtonMode || 0;
   await transfer(device, { cmd: CMD.SET_GAME_MODE, contentSize: 56, data: e, timeout: timeoutFor(frameVersion) });
   return true;
 }
@@ -101,7 +104,7 @@ export async function getKeyData(device: HIDDevice, frameVersion?: number): Prom
 export interface LedEffect {
   mode: number;
   red: number;
-  green: number;
+  green: number; 
   blue: number;
   /** byte 4: always written as 255 on set (driverSetting). */
   driverSetting: number;
@@ -138,6 +141,48 @@ export async function setLedEffect(device: HIDDevice, v: LedEffect): Promise<boo
   e[8] = v.colorMode; e[9] = v.brightness; e[10] = v.speed; e[11] = v.direction;
   e[12] = v.effectModeType;
   await transfer(device, { cmd: CMD.SET_LED_EFFECT, contentSize: 16, data: e });
+  return true;
+}
+
+// ─── Side Light ── minified getSideLight `Ge` / setSideLight `Tt`
+// 24-byte payload.
+
+export interface SideLight {
+  mode: number;
+  red: number;
+  green: number;
+  blue: number;
+  colorMode: number;
+  brightness: number;
+  speed: number;
+}
+
+export async function getSideLight(device: HIDDevice, frameVersion?: number): Promise<SideLight> {
+  const o = concatPayload(
+    await transfer(device, { cmd: CMD.GET_SIDE_LIGHT, contentSize: 24, timeout: timeoutFor(frameVersion) }),
+    24,
+  );
+  return {
+    mode: o[0],
+    red: o[1],
+    green: o[2],
+    blue: o[3],
+    colorMode: o[8],
+    brightness: o[9],
+    speed: o[10],
+  };
+}
+
+export async function setSideLight(device: HIDDevice, v: SideLight, frameVersion?: number): Promise<boolean> {
+  const e = new Uint8Array(24).fill(0);
+  e[0] = v.mode;
+  e[1] = v.red;
+  e[2] = v.green;
+  e[3] = v.blue;
+  e[8] = v.colorMode;
+  e[9] = v.brightness;
+  e[10] = v.speed;
+  await transfer(device, { cmd: CMD.SET_SIDE_LIGHT, contentSize: 24, data: e, timeout: timeoutFor(frameVersion) });
   return true;
 }
 

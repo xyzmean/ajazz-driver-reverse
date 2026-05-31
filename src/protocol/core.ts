@@ -76,6 +76,7 @@ export enum CMD {
   GET_MAGNETIC_AXIS_DKS_DATA = 24,
   GET_LIGHT_BOX = 27,
   GET_DEFAULT_FN_KEY_MATRIX = 28,
+  GET_SIDE_LIGHT = 29,
   GET_DEFAULT_KEY_MATRIX = 31,
   SET_GAME_MODE = 33,
   SET_KEY = 34,
@@ -87,6 +88,7 @@ export enum CMD {
   SET_MAGNETIC_AXIS_DKS_DATA = 40,
   SET_DOT_MATRIX_MODE = 42,
   SET_LIGHT_BOX = 43,
+  SET_SIDE_LIGHT = 45,
   SET_KEYBOARD_CUSTOM_FUNCTION_ON = 48,
   SET_KEYBOARD_CUSTOM_FUNCTION_OFF = 49,
   GET_LED_DATA = 50,
@@ -288,7 +290,7 @@ export interface TransferOptions {
  * here — this layer just throws.
  */
 export async function transfer(device: HIDDevice, opts: TransferOptions): Promise<Uint8Array[]> {
-  const {
+  const { 
     cmd,
     contentSize = 24,
     addrStart = 0,
