@@ -1,11 +1,8 @@
 /**
  * Ajazz keyboard WebHID protocol — reverse-engineered core.
  *
- * Extracted by hand from the minified production bundle
- * (`app/assets/index-BosuIawc.js`, deminified into `index.core.pretty.js`).
- * The upstream bundle ships no sourcemaps (the CDN returns the SPA index.html
- * for any `*.js.map` request), so this module is reconstructed from the
- * minified source. Original (minified) symbol names are noted in comments so
+ * Extracted by hand from the minified production bundle.
+ * Original (minified) symbol names are noted in comments so
  * findings can be re-derived after an upstream rebuild.
  *
  * This file owns the protocol independently of the upstream UI bundle: it is
@@ -26,7 +23,7 @@
  *                            [6] doubles as the last-packet flag (1 = last)
  *     [8..]  payload         chunk data
  *
- *   Response packet (parsed by `parseResponse`, minified `Pe`):
+ *   Response packet (parsed by `parseResponse`, minified `xe`):
  *     [0]    0x55            response magic (RESPONSE_HEADER); else error
  *     [1]    cmd             echoes the request opcode
  *     [2]    lenOrType
@@ -38,28 +35,12 @@
  *   (`buf[31] = sum(buf[0..30]) & 0xFF`); that lives in those commands, not here.
  */
 
-// ─── Constants ──────────────────────────────────────────────────────────────
-
-/** WebHID report ID used for every transfer (minified `V`). */
 export const REPORT_ID = 0;
-
-/** First byte of every request packet (minified literal `170`). */
 export const REQUEST_HEADER = 0xaa;
-
-/** First byte of every valid response packet (minified literal `85`). */
 export const RESPONSE_HEADER = 0x55;
-
-/** Bytes [0..7] are header; payload starts at byte 8. */
 export const HEADER_SIZE = 8;
-
-/** Fallback report length when the device descriptor doesn't specify one. */
 export const DEFAULT_REPORT_SIZE = 32;
-
-/** Default usagePage probed when opening a device (minified `z`, 0xFF67). */
 export const DEFAULT_USAGE_PAGE = 65383;
-
-// ─── Command opcodes ──────────────────────────────────────────────────────────
-// Minified enum `E`, exported upstream as `CMD`. Verbatim names/values.
 
 export enum CMD {
   COMMUNICATION_START = 1,
@@ -76,6 +57,7 @@ export enum CMD {
   GET_MAGNETIC_AXIS_DKS_DATA = 24,
   GET_LIGHT_BOX = 27,
   GET_DEFAULT_FN_KEY_MATRIX = 28,
+  GET_SIDE_LIGHT = 29,
   GET_DEFAULT_KEY_MATRIX = 31,
   SET_GAME_MODE = 33,
   SET_KEY = 34,
@@ -87,6 +69,7 @@ export enum CMD {
   SET_MAGNETIC_AXIS_DKS_DATA = 40,
   SET_DOT_MATRIX_MODE = 42,
   SET_LIGHT_BOX = 43,
+  SET_SIDE_LIGHT = 45,
   SET_KEYBOARD_CUSTOM_FUNCTION_ON = 48,
   SET_KEYBOARD_CUSTOM_FUNCTION_OFF = 49,
   GET_LED_DATA = 50,
@@ -116,7 +99,6 @@ export enum CMD {
   GET_24G_DISCONNECT_NOTIFY = 252,
 }
 
-/** Factory-reset selector bitmask (minified `pe`, exported as `FACTORY_RESET_TYPE`). */
 export enum FactoryResetType {
   KEY_RESET = 1,
   LIGHTING_RESET = 2,
@@ -125,25 +107,12 @@ export enum FactoryResetType {
   RESET_ALL = 255,
 }
 
-// ─── Packet framing ───────────────────────────────────────────────────────────
-
 export interface PacketOptions {
-  /** Optional 1–3 extra header bytes placed at [5..7] (minified `o`). */
   otherHeader?: number[];
-  /** Fully custom header written from byte 0 (minified `e`); overrides all framing. */
   customHeader?: Uint8Array;
-  /** Marks this as the final packet of a multi-packet write (sets [6] when no otherHeader). */
   isLastPacket?: boolean;
 }
 
-/**
- * Build a single request packet. Minified `P`.
- * @param cmd      opcode
- * @param len      payload length carried by this packet (byte [2])
- * @param addr     little-endian target address (bytes [3..4])
- * @param payload  chunk data written from byte 8
- * @param size     total report size (default 32)
- */
 export function buildPacket(
   cmd: CMD,
   len: number,
@@ -152,32 +121,24 @@ export function buildPacket(
   size = DEFAULT_REPORT_SIZE,
   opts: PacketOptions = {},
 ): Uint8Array<ArrayBuffer> {
-  // Backed by a plain ArrayBuffer so it satisfies WebHID's BufferSource (TS 5.7+).
   const buf = new Uint8Array(new ArrayBuffer(size));
-
-  // customHeader path: caller controls the header entirely.
   if (opts.customHeader) {
     buf.set(opts.customHeader, 0);
     if (payload) buf.set(payload, opts.customHeader.length);
     return buf;
   }
-
   buf[0] = REQUEST_HEADER;
   buf[1] = cmd;
   buf[2] = len;
   buf[3] = addr & 0xff;
   buf[4] = (addr >> 8) & 0xff;
-
   if (opts.otherHeader && Array.isArray(opts.otherHeader)) {
     for (let i = 0; i < Math.min(opts.otherHeader.length, 3); i++) {
       if (opts.otherHeader[i] !== undefined) buf[5 + i] = opts.otherHeader[i] & 0xff;
     }
   }
-
-  // When no meaningful otherHeader[1], byte [6] is the last-packet flag.
   const hasHeaderByte1 = opts.otherHeader && opts.otherHeader.length >= 2 && opts.otherHeader[1] !== undefined;
   if (!hasHeaderByte1) buf[6] = opts.isLastPacket ? 1 : 0;
-
   if (payload) buf.set(payload, HEADER_SIZE);
   return buf;
 }
@@ -187,14 +148,12 @@ export interface ParsedResponse {
   cmd: number;
   lenOrType: number;
   addr: number;
-  /** Payload, bytes [8..]. */
   data: Uint8Array;
 }
 
-/** Parse a response packet. Returns null on a bad header. Minified `Pe`. */
 export function parseResponse(buf: Uint8Array): ParsedResponse | null {
   if (buf[0] !== RESPONSE_HEADER) {
-    console.error(`Bad response header: 0x${buf[0].toString(16)}`); // 数据包头错误
+    console.error(`Bad response header: 0x${buf[0].toString(16)}`);
     return null;
   }
   return {
@@ -206,14 +165,6 @@ export function parseResponse(buf: Uint8Array): ParsedResponse | null {
   };
 }
 
-// ─── Request / response ───────────────────────────────────────────────────────
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-/**
- * Resolve once an inputreport whose cmd (and optional addr) matches arrives,
- * or reject after `timeout` ms. Minified `j`.
- */
 export function waitForResponse<T = Uint8Array>(
   device: HIDDevice,
   match: { command: CMD; timeout?: number; addr?: number },
@@ -231,7 +182,7 @@ export function waitForResponse<T = Uint8Array>(
     };
     timer = setTimeout(() => {
       cleanup();
-      reject(new Error(`Command 0x${command.toString(16)} response timeout`)); // 命令...响应超时
+      reject(new Error(`Command 0x${command.toString(16)} response timeout`));
     }, timeout);
     const onReport = (event: HIDInputReportEvent) => {
       const raw = new Uint8Array(event.data.buffer);
@@ -251,42 +202,20 @@ export function waitForResponse<T = Uint8Array>(
 
 export interface TransferOptions {
   cmd: CMD;
-  /** Total content bytes to transfer across all packets (default 24). */
   contentSize?: number;
-  /** Starting address (default 0). */
   addrStart?: number;
-  /** Outgoing payload for writes; omit for reads. */
   data?: Uint8Array;
-  /** Per-packet response timeout in ms (default 500). */
   timeout?: number;
-  /** Retries per packet before giving up (default 3). */
   maxRetries?: number;
-  /** Header byte count reserved per packet (default 8). */
   headerCount?: number;
   otherHeader?: number[];
   customHeader?: Uint8Array;
-  /** Match responses against a different opcode than `cmd`. */
   responseCmd?: CMD;
   abortSignal?: AbortSignal;
-  /** Set last-packet flag on the final chunk (default true). */
   isNeedLastPacketFlag?: boolean;
-  /** Require the response addr to match the request addr (default false). */
   checkAddr?: boolean;
 }
 
-/**
- * Chunked request/response transport. Minified `C`, exported as `readDataChunks`.
- *
- * Splits `contentSize` into ceil(contentSize / (reportSize - headerCount))
- * packets, sends each with `sendReport(REPORT_ID, …)`, and awaits a matching
- * response with retries. Returns the array of raw response packets; callers
- * typically do `responses.flatMap(r => [...r.slice(8)]).slice(0, contentSize)`
- * to reassemble the payload.
- *
- * NOTE: the upstream version, on terminal failure, tears down the device and
- * navigates the SPA back to "/". That UI coupling is intentionally omitted
- * here — this layer just throws.
- */
 export async function transfer(device: HIDDevice, opts: TransferOptions): Promise<Uint8Array[]> {
   const {
     cmd,
@@ -303,33 +232,27 @@ export async function transfer(device: HIDDevice, opts: TransferOptions): Promis
     isNeedLastPacketFlag = true,
     checkAddr = false,
   } = opts;
-
   const reportSize =
     device?.collections?.[0]?.outputReports?.[0]?.items?.[0]?.reportCount || DEFAULT_REPORT_SIZE;
   const perPacket = reportSize - headerCount;
   const packetCount = Math.ceil(contentSize / perPacket);
   const responses: Uint8Array[] = [];
-
   for (let i = 0; i < packetCount; i++) {
-    if (abortSignal?.aborted) throw new Error("Operation aborted"); // 操作已中断
-
+    if (abortSignal?.aborted) throw new Error("Operation aborted");
     const addr = addrStart + i * perPacket;
     const remaining = contentSize - i * perPacket;
     const isLast = isNeedLastPacketFlag ? i === packetCount - 1 : false;
     const len = i === packetCount - 1 ? remaining : perPacket;
-
     let chunk: Uint8Array | undefined;
     if (data) {
       const from = i * perPacket;
       chunk = data.slice(from, Math.min(from + perPacket, data.length));
     }
-
     const packet = buildPacket(cmd, len, addr, chunk, reportSize, {
       otherHeader,
       customHeader,
       isLastPacket: isLast,
     });
-
     let attempt = 0;
     let response: Uint8Array | null = null;
     while (attempt <= maxRetries && !response) {
@@ -357,14 +280,10 @@ export async function transfer(device: HIDDevice, opts: TransferOptions): Promis
   return responses;
 }
 
-/** Reassemble a chunked read into a flat payload of `contentSize` bytes. */
 export function concatPayload(responses: Uint8Array[], contentSize: number): Uint8Array {
   return new Uint8Array(responses.flatMap((r) => Array.from(r.slice(HEADER_SIZE)))).slice(0, contentSize);
 }
 
-// ─── Device open ──────────────────────────────────────────────────────────────
-
-/** Find & open a device by productId on a given usagePage. Minified `z`. */
 export async function openDevice(
   productId: number,
   usagePage = DEFAULT_USAGE_PAGE,
@@ -381,15 +300,11 @@ export async function openDevice(
   return device;
 }
 
-// ─── Worked example: GET_DEVICE_INFO ──────────────────────────────────────────
-// Minified `Ce` (exported `getDeviceInfo`). 48-byte payload layout, verbatim.
-
 export interface DeviceInfo {
   romSize: number;
   macroSpaceSize: number;
   vid: number;
   pid: number;
-  /** Firmware version, e.g. 1.23 (BCD-ish: low nibble + high nibble*10 + byte9*100, /100). */
   version: number;
   sensor: number;
   manufacturer: number;
@@ -413,7 +328,7 @@ export async function getDeviceInfo(device: HIDDevice): Promise<DeviceInfo> {
   const e = concatPayload(responses, 48);
   return {
     romSize: e[0],
-    macroSpaceSize: 512, // upstream conditionally reads e[2]|e[3]<<8 when macroConfig.isGetMaxMacroSpaceSize
+    macroSpaceSize: 512,
     vid: e[4] | (e[5] << 8),
     pid: e[6] | (e[7] << 8),
     version: parseFloat((((e[8] & 15) + ((e[8] & 240) >> 4) * 10 + e[9] * 100) / 100).toFixed(2)),
