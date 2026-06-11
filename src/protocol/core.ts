@@ -2,7 +2,7 @@
  * Ajazz keyboard WebHID protocol — reverse-engineered core.
  *
  * Extracted by hand from the minified production bundle
- * (`app/assets/index-BosuIawc.js`, deminified into `index.core.pretty.js`).
+ * (`app/assets/index-DD0bkP7K.js` из artifact-260604-0728, deminified into `index.core.pretty.js`).
  * The upstream bundle ships no sourcemaps (the CDN returns the SPA index.html
  * for any `*.js.map` request), so this module is reconstructed from the
  * minified source. Original (minified) symbol names are noted in comments so
@@ -26,7 +26,7 @@
  *                            [6] doubles as the last-packet flag (1 = last)
  *     [8..]  payload         chunk data
  *
- *   Response packet (parsed by `parseResponse`, minified `Pe`):
+ *   Response packet (parsed by `parseResponse`, minified `xe`):
  *     [0]    0x55            response magic (RESPONSE_HEADER); else error
  *     [1]    cmd             echoes the request opcode
  *     [2]    lenOrType
@@ -76,6 +76,7 @@ export enum CMD {
   GET_MAGNETIC_AXIS_DKS_DATA = 24,
   GET_LIGHT_BOX = 27,
   GET_DEFAULT_FN_KEY_MATRIX = 28,
+  GET_SIDE_LIGHT = 29,
   GET_DEFAULT_KEY_MATRIX = 31,
   SET_GAME_MODE = 33,
   SET_KEY = 34,
@@ -87,6 +88,7 @@ export enum CMD {
   SET_MAGNETIC_AXIS_DKS_DATA = 40,
   SET_DOT_MATRIX_MODE = 42,
   SET_LIGHT_BOX = 43,
+  SET_SIDE_LIGHT = 45,
   SET_KEYBOARD_CUSTOM_FUNCTION_ON = 48,
   SET_KEYBOARD_CUSTOM_FUNCTION_OFF = 49,
   GET_LED_DATA = 50,
@@ -191,7 +193,7 @@ export interface ParsedResponse {
   data: Uint8Array;
 }
 
-/** Parse a response packet. Returns null on a bad header. Minified `Pe`. */
+/** Parse a response packet. Returns null on a bad header. Minified `xe`. */
 export function parseResponse(buf: Uint8Array): ParsedResponse | null {
   if (buf[0] !== RESPONSE_HEADER) {
     console.error(`Bad response header: 0x${buf[0].toString(16)}`); // 数据包头错误
@@ -275,7 +277,7 @@ export interface TransferOptions {
 }
 
 /**
- * Chunked request/response transport. Minified `C`, exported as `readDataChunks`.
+ * Chunked request/response transport. Minified `w`, exported as `readDataChunks`.
  *
  * Splits `contentSize` into ceil(contentSize / (reportSize - headerCount))
  * packets, sends each with `sendReport(REPORT_ID, …)`, and awaits a matching

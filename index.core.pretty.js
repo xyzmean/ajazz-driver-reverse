@@ -3,24 +3,24 @@ const __vite__mapDeps = (
   m = __vite__mapDeps,
   d = m.f ||
     (m.f = [
-      "assets/layout-default-m1PKe3cP.js",
+      "assets/layout-default-CyiI7Opn.js",
       "assets/vendor-CSL4mpQI.js",
       "assets/tui-image-editor-CKzlsQdZ.js",
       "assets/tui-image-editor-C8BkruAQ.css",
       "assets/layout-default-7QA9ADOZ.css",
     ]),
 ) => i.map((i) => d[i]);
-import { b as v, n as Q, o as ee, $ as De } from "./layout-default-m1PKe3cP.js";
-import { useProtocolStore as Ie } from "./default-Dc1r_ZkI.js";
+import { b as K, n as Q, o as ee, $ as De } from "./layout-default-CyiI7Opn.js";
+import { useProtocolStore as Ie } from "./default-32RYGyje.js";
 import {
   funcChars as te,
   specialChars as q,
-  extendChars as X,
+  extendChars as H,
   basicChars as J,
   funcV2Chars as re,
-} from "./characters-CWugH23S.js";
+} from "./characters-rgw61Eud.js";
 import { br as oe } from "./vendor-CSL4mpQI.js";
-import { r as Le } from "./main-BbjqaSeI.js";
+import { r as Le } from "./main-Cl8E0z-P.js";
 import "./tui-image-editor-CKzlsQdZ.js";
 const R = {
   DEFAULT: 0,
@@ -81,7 +81,8 @@ function W(t, i, r, n = "") {
       let o = 0,
         e = 0;
       (r.keyType
-        ? ((o = r.keyType === 2 ? (r.value ?? 0) : 0), (e = r.keyType === 1 ? (r.value ?? 0) : 0))
+        ? ((o = r.keyType === 2 ? (r.value ?? 0) : 0),
+          (e = r.keyType === 1 ? (r.value ?? 0) : 0))
         : ((o = r.param1 ?? 0), (e = r.param2 ?? 0)),
         (t[i] = 128 | ((o >> 8) & 127)),
         (t[i + 1] = o & 255),
@@ -117,17 +118,17 @@ const Z = (t) => {
       case R.MT:
         return fe(t);
       case R.TGL:
-        return me(t);
-      case R.SOCD:
         return de(t);
+      case R.SOCD:
+        return me(t);
       case R.RS:
         return ye(t);
       case R.FUNC:
-        return Te(t);
-      case R.END:
         return ge(t);
-      case R.MPT:
+      case R.END:
         return _e(t);
+      case R.MPT:
+        return Te(t);
       default:
         console.warn(`未知的页面类型: ${t.pageType}`);
         return;
@@ -175,22 +176,22 @@ const Z = (t) => {
           r[n].userKey = fe(a);
           break;
         case R.TGL:
-          r[n].userKey = me(a);
+          r[n].userKey = de(a);
           break;
         case R.SOCD:
-          r[n].userKey = de(a);
+          r[n].userKey = me(a);
           break;
         case R.RS:
           r[n].userKey = ye(a);
           break;
         case R.FUNC:
-          r[n].userKey = Te(a);
-          break;
-        case R.END:
           r[n].userKey = ge(a);
           break;
-        case R.MPT:
+        case R.END:
           r[n].userKey = _e(a);
+          break;
+        case R.MPT:
+          r[n].userKey = Te(a);
           break;
         default:
           console.warn(`未知的页面类型: ${a.pageType}`);
@@ -216,14 +217,16 @@ const Z = (t) => {
   se = (t) => {
     const { param1: i, param2: r } = t;
     if (i !== 0) {
-      const n = X.find((a) => a.param1 === i);
+      const n = H.find((a) => a.param1 === i);
       if (n) return n;
     }
     if (r !== 0) {
       let n = J.find((a) => a.value === r);
-      if (n || ((n = X.find((a) => a.value === r)), n)) return n;
+      if (n || ((n = H.find((a) => a.value === r)), n)) return n;
     }
-    console.warn(`未找到对应的键盘按键: param1=0x${i.toString(16)}, param2=0x${r.toString(16)}`);
+    console.warn(
+      `未找到对应的键盘按键: param1=0x${i.toString(16)}, param2=0x${r.toString(16)}`,
+    );
   },
   ce = (t) => {
     const { param1: i, param2: r } = t,
@@ -237,7 +240,14 @@ const Z = (t) => {
       a = i,
       o = r,
       e = n;
-    return { name: `M${a + 1}`, value: a, page: "MACRO", param1: a, param2: o, param3: e };
+    return {
+      name: `M${a + 1}`,
+      value: a,
+      page: "MACRO",
+      param1: a,
+      param2: o,
+      param3: e,
+    };
   },
   le = (t) => {
     const { param1: i, param2: r, param3: n } = t;
@@ -256,18 +266,25 @@ const Z = (t) => {
     const { param1: i, param2: r, param3: n } = t;
     return { name: "MT", page: "MT", param1: i, param2: r, param3: n };
   },
-  me = (t) => {
+  de = (t) => {
     const { param1: i } = t;
     return { name: "TGL", value: i, page: "TGL" };
   },
-  de = (t) => {
+  me = (t) => {
     const { param1: i, param2: r, param3: n } = t,
       a = i,
       o = r,
       e = n;
     return (
       (a < 1 || a > 4) && console.warn(`SOCD模式选择超出范围: ${a}`),
-      { name: "SOCD", text: "senior_btn2", page: "SOCD", param1: a, param2: o, param3: e }
+      {
+        name: "SOCD",
+        text: "senior_btn2",
+        page: "SOCD",
+        param1: a,
+        param2: o,
+        param3: e,
+      }
     );
   },
   ye = (t) => {
@@ -280,18 +297,20 @@ const Z = (t) => {
       { name: "RS", page: "RS", param1: 0, param2: o, param3: e }
     );
   },
-  Te = (t) => {
+  ge = (t) => {
     var e, c;
     const { param1: i, param2: r, param3: n } = t,
       a = n + (r << 8) + (i << 16);
     return {
-      name: ((e = te.find((s) => s.value === a)) == null ? void 0 : e.name) || "FUNC",
+      name:
+        ((e = te.find((s) => s.value === a)) == null ? void 0 : e.name) ||
+        "FUNC",
       text: (c = te.find((s) => s.value === a)) == null ? void 0 : c.text,
       value: a,
       page: "FUNC",
     };
   },
-  _e = (t) => {
+  Te = (t) => {
     const { param1: i, param2: r, param3: n } = t;
     return { name: "MPT", page: "MPT", param1: i, param2: r, param3: n };
   },
@@ -302,29 +321,31 @@ const Z = (t) => {
     let c, s;
     if (o !== 0 && o < 4096) {
       const l = J.find((f) => f.value === o),
-        u = X.find((f) => f.value === o);
+        u = H.find((f) => f.value === o);
       c = l || u;
     } else c = re.find((l) => l.value === o);
     if (e !== 0 && e < 4096) {
       const l = J.find((f) => f.value === e),
-        u = X.find((f) => f.value === e);
+        u = H.find((f) => f.value === e);
       s = l || u;
     } else s = re.find((l) => l.value === e);
     return {
-      name: (s == null ? void 0 : s.name) || (c == null ? void 0 : c.name) || "",
-      text: (s == null ? void 0 : s.text) || (c == null ? void 0 : c.text) || "",
+      name:
+        (s == null ? void 0 : s.name) || (c == null ? void 0 : c.name) || "",
+      text:
+        (s == null ? void 0 : s.text) || (c == null ? void 0 : c.text) || "",
       value: e,
       page: "FUNC_V2",
       param1: o,
       param2: e,
     };
   },
-  ge = (t) => {
+  _e = (t) => {
     const { param1: i, param2: r } = t;
     return { name: "END", page: "END", param1: i, param2: r };
   };
-let A = null;
-const V = 0,
+let S = null;
+const F = 0,
   E = {
     COMMUNICATION_START: 1,
     COMMUNICATION_END: 2,
@@ -340,6 +361,7 @@ const V = 0,
     GET_MAGNETIC_AXIS_DKS_DATA: 24,
     GET_LIGHT_BOX: 27,
     GET_DEFAULT_FN_KEY_MATRIX: 28,
+    GET_SIDE_LIGHT: 29,
     GET_DEFAULT_KEY_MATRIX: 31,
     SET_GAME_MODE: 33,
     SET_KEY: 34,
@@ -351,6 +373,7 @@ const V = 0,
     SET_MAGNETIC_AXIS_DKS_DATA: 40,
     SET_DOT_MATRIX_MODE: 42,
     SET_LIGHT_BOX: 43,
+    SET_SIDE_LIGHT: 45,
     SET_KEYBOARD_CUSTOM_FUNCTION_ON: 48,
     SET_KEYBOARD_CUSTOM_FUNCTION_OFF: 49,
     GET_LED_DATA: 50,
@@ -379,53 +402,71 @@ const V = 0,
     GET_MAGNETIC_AXIS_CALIBRATION_DATA: 251,
     GET_24G_DISCONNECT_NOTIFY: 252,
   },
-  pe = { KEY_RESET: 1, LIGHTING_RESET: 2, MACRO_RESET: 4, CLEAR_CALIBRATION: 5, RESET_ALL: 255 },
-  He = async (t, i) => {
-    var y, T, m;
+  pe = {
+    KEY_RESET: 1,
+    LIGHTING_RESET: 2,
+    MACRO_RESET: 4,
+    CLEAR_CALIBRATION: 5,
+    RESET_ALL: 255,
+  },
+  qe = async (t, i) => {
+    var g, d, p, T;
     const r = await Ce(t, !0, i),
       n = await Re(t),
       a = await Ne(t, i);
-    let o, e, c, s, l, u, f, d;
+    let o, e, c, s, l, u, f, m, y;
     return (
-      (y = i.customKeysConfig) != null && y.isShowFn && ((f = await ve(t, i)), (d = await Ke(t))),
+      (g = i.customKeysConfig) != null &&
+        g.isShowFn &&
+        ((m = await Ke(t, i)), (y = await ve(t))),
       i.routesName.includes("lighting") &&
         ((o = await Ue(t)),
         (e = await ke(t)),
-        (T = i.lightingConfig) != null && T.isShowLightBox && (c = await be(t))),
-      i.routesName.includes("macro") && (s = await Ge(t)),
-      i.routesName.includes("performance") && (l = await Fe(t)),
+        (d = i.lightingConfig) != null && d.isShowLightBox && (c = await be(t)),
+        (p = i.lightingConfig) != null &&
+          p.isShowSideLight &&
+          (s = await Ge(t))),
+      i.routesName.includes("macro") && (l = await Ve(t)),
+      i.routesName.includes("performance") && (u = await Fe(t)),
       i.routesName.includes("advancedKeys") &&
-        (m = i.advancedKeysConfig) != null &&
-        m.advancedKeysList.includes("DKS") &&
-        (u = await Ve(t)),
+        (T = i.advancedKeysConfig) != null &&
+        T.advancedKeysList.includes("DKS") &&
+        (f = await Pe(t)),
       {
         deviceInfo: r,
         gameModeInfo: n,
         keyData: a,
-        fnKeyData: f,
+        fnKeyData: m,
         ledEffect: o,
         customLedData: e,
         lightBoxData: c,
-        macroDataList: s,
-        magneticAxisRT: l,
-        magneticAxisDKS: u,
-        defaultFnKeyMatrix: d,
+        sideLightData: s,
+        macroDataList: l,
+        magneticAxisRT: u,
+        magneticAxisDKS: f,
+        defaultFnKeyMatrix: y,
       }
     );
   },
   Ce = async (t, i = !0, r) => {
     var u;
-    const a = await C(t, { cmd: E.GET_DEVICE_INFO, contentSize: 48 }),
+    const a = await w(t, { cmd: E.GET_DEVICE_INFO, contentSize: 48 }),
       e = new Uint8Array(a.flatMap((f) => Array.from(f.slice(8)))).slice(0, 48),
       c = e[2] | (e[3] << 8),
-      s = (u = r == null ? void 0 : r.macroConfig) != null && u.isGetMaxMacroSpaceSize ? c : 512,
+      s =
+        (u = r == null ? void 0 : r.macroConfig) != null &&
+        u.isGetMaxMacroSpaceSize
+          ? c
+          : 512,
       l = {
         romSize: e[0],
         macroSpaceSize: s,
         vid: e[4] | (e[5] << 8),
         pid: e[6] | (e[7] << 8),
         version: parseFloat(
-          (((e[8] & 15) + ((e[8] & 240) >> 4) * 10 + e[9] * 100) / 100).toFixed(2),
+          (((e[8] & 15) + ((e[8] & 240) >> 4) * 10 + e[9] * 100) / 100).toFixed(
+            2,
+          ),
         ),
         sensor: e[10] | (e[11] << 8),
         manufacturer: e[12] | (e[13] << 8),
@@ -443,13 +484,18 @@ const V = 0,
         frameVersion: e[30],
         lightingVersion: e[31],
       };
-    return (i && ((A = Ie()), (A.deviceStorage.deviceInfo = l)), l);
+    return (i && ((S = Ie()), (S.deviceStorage.deviceInfo = l)), l);
   },
   Re = async (t) => {
     var c;
-    const i = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+    const i =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       r = 56,
-      n = await C(t, { cmd: E.GET_GAME_MODE, contentSize: r, timeout: i === 1 ? 2e3 : 500 }),
+      n = await w(t, {
+        cmd: E.GET_GAME_MODE,
+        contentSize: r,
+        timeout: i === 1 ? 2e3 : 500,
+      }),
       o = new Uint8Array(n.flatMap((s) => Array.from(s.slice(8)))).slice(0, r),
       e = {
         gameMode: o[1],
@@ -464,12 +510,14 @@ const V = 0,
         stabilityMode: o[11],
         autoCalibration: o[14],
         singleKeyWakeup: o[15],
+        pushButtonMode: o[16],
       };
-    return ((A.deviceStorage.gameModeInfo = e), e);
+    return ((S.deviceStorage.gameModeInfo = e), e);
   },
-  qe = async (t, i, ...r) => {
+  Je = async (t, i, ...r) => {
     var c;
-    const n = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+    const n =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       a = r[0],
       o = 56,
       e = new Uint8Array(o).fill(0);
@@ -486,13 +534,21 @@ const V = 0,
       (e[11] = a.stabilityMode || 0),
       (e[14] = a.autoCalibration || 0),
       (e[15] = a.singleKeyWakeup || 0),
-      await C(t, { cmd: E.SET_GAME_MODE, contentSize: o, data: e, timeout: n === 1 ? 2e3 : 500 }),
-      (A.deviceStorage.gameModeInfo = a),
+      (e[16] = a.pushButtonMode || 0),
+      await w(t, {
+        cmd: E.SET_GAME_MODE,
+        contentSize: o,
+        data: e,
+        timeout: n === 1 ? 2e3 : 500,
+      }),
+      (S.deviceStorage.gameModeInfo = a),
       !0
     );
   },
   Oe = (t) =>
-    t.length >= 13 && t[0] === 85 && t[1] === E.GET_MAGNETIC_AXIS_CALIBRATION_DATA
+    t.length >= 13 &&
+    t[0] === 85 &&
+    t[1] === E.GET_MAGNETIC_AXIS_CALIBRATION_DATA
       ? {
           keyValue: t[2],
           calibrationStatus: t[3],
@@ -516,7 +572,7 @@ const V = 0,
           console.error(`调用${i}回调函数时出错:`, e);
         }
     },
-  Je = (t, i, r) => {
+  We = (t, i, r) => {
     try {
       const n = (o) => {
         const { data: e } = o,
@@ -548,7 +604,7 @@ const V = 0,
       return (console.error("启动2.4G断开连接监听失败:", n), { success: !1 });
     }
   },
-  We = (t, i, r) => {
+  Ze = (t, i, r) => {
     try {
       const n = (o) => {
         const { data: e } = o,
@@ -580,7 +636,7 @@ const V = 0,
       return (console.error("启动重置监听失败:", n), { success: !1 });
     }
   },
-  Ze = (t, i, r) => {
+  je = (t, i, r) => {
     try {
       const n = (o) => {
         const { data: e } = o,
@@ -612,7 +668,7 @@ const V = 0,
       return (console.error("启动2.4G休眠监听失败:", n), { success: !1 });
     }
   },
-  je = async (t, i, r) => {
+  Qe = async (t, i, r) => {
     try {
       const n = (o) => {
         const { data: e } = o,
@@ -644,7 +700,7 @@ const V = 0,
       return (console.error("启动2.4G唤醒监听失败:", n), { success: !1 });
     }
   },
-  Qe = async (t, i, r) => {
+  et = async (t, i, r) => {
     var a, o, e, c, s, l;
     const n = P(
       E.SET_CALIBRATION_ON,
@@ -655,7 +711,10 @@ const V = 0,
         (s =
           (c =
             (e =
-              (o = (a = t == null ? void 0 : t.collections) == null ? void 0 : a[0]) == null
+              (o =
+                (a = t == null ? void 0 : t.collections) == null
+                  ? void 0
+                  : a[0]) == null
                 ? void 0
                 : o.outputReports) == null
               ? void 0
@@ -668,15 +727,15 @@ const V = 0,
         : l.reportCount) || 32,
     );
     try {
-      const u = j(t, { command: E.SET_CALIBRATION_ON, timeout: 1e3 }, (d) => d);
-      (await t.sendReport(V, n), await u);
+      const u = j(t, { command: E.SET_CALIBRATION_ON, timeout: 1e3 }, (m) => m);
+      (await t.sendReport(F, n), await u);
       const f = Se(r, "校准数据");
       return (t.addEventListener("inputreport", f), !0);
     } catch (u) {
       return (console.error("开启校准失败:", u), !1);
     }
   },
-  et = async (t, i) => {
+  tt = async (t, i) => {
     var r, n, a, o, e, c;
     try {
       const s = P(
@@ -688,7 +747,10 @@ const V = 0,
           (e =
             (o =
               (a =
-                (n = (r = t == null ? void 0 : t.collections) == null ? void 0 : r[0]) == null
+                (n =
+                  (r = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : r[0]) == null
                   ? void 0
                   : n.outputReports) == null
                 ? void 0
@@ -700,18 +762,18 @@ const V = 0,
           ? void 0
           : c.reportCount) || 32,
       );
-      return (await t.sendReport(V, s), !0);
+      return (await t.sendReport(F, s), !0);
     } catch (s) {
       return (console.error("结束校准失败:", s), !1);
     }
   },
-  tt = async (t, i) => {
+  rt = async (t, i) => {
     try {
       const r = new Uint8Array(8).fill(0);
       return (
         (r[0] = 170),
         (r[1] = E.SET_CALIBRATION_ON_V2),
-        await C(t, {
+        await w(t, {
           cmd: E.SET_CALIBRATION_ON_V2,
           contentSize: 24,
           headerCount: r.length,
@@ -724,13 +786,13 @@ const V = 0,
       return (console.error("开启校准（新协议）失败:", r), !1);
     }
   },
-  rt = async (t, i) => {
+  ot = async (t, i) => {
     try {
       const r = new Uint8Array(8).fill(0);
       return (
         (r[0] = 170),
         (r[1] = E.SET_CALIBRATION_OFF_V2),
-        await C(t, {
+        await w(t, {
           cmd: E.SET_CALIBRATION_OFF_V2,
           contentSize: 24,
           headerCount: r.length,
@@ -743,7 +805,7 @@ const V = 0,
       return (console.error("结束校准（新协议）失败:", r), !1);
     }
   },
-  ot = async (t, i, ...r) => {
+  nt = async (t, i, ...r) => {
     var n, a, o, e, c, s;
     try {
       const l =
@@ -751,7 +813,10 @@ const V = 0,
             (c =
               (e =
                 (o =
-                  (a = (n = t == null ? void 0 : t.collections) == null ? void 0 : n[0]) == null
+                  (a =
+                    (n = t == null ? void 0 : t.collections) == null
+                      ? void 0
+                      : n[0]) == null
                     ? void 0
                     : a.outputReports) == null
                   ? void 0
@@ -764,30 +829,33 @@ const V = 0,
             : s.reportCount) || 32,
         u = r[0],
         f = r[1],
-        d = r[2],
+        m = r[2],
         y = 8,
-        T = u.length * y,
-        m = new Uint8Array(T).fill(0);
-      for (let _ = 0; _ < T / y; _++) m[_ * y] = u[_] ?? 0;
-      const p = await C(t, {
+        g = u.length * y,
+        d = new Uint8Array(g).fill(0);
+      for (let _ = 0; _ < g / y; _++) d[_ * y] = u[_] ?? 0;
+      const p = await w(t, {
           cmd: E.GET_MAGNETIC_AXIS_STATUS,
-          contentSize: T,
-          data: m,
+          contentSize: g,
+          data: d,
           addrStart: f * (l - 8),
           timeout: 2e3,
-          isNeedLastPacketFlag: d,
+          isNeedLastPacketFlag: m,
           checkAddr: !0,
         }),
-        h = new Uint8Array(p.flatMap((_) => Array.from(_.slice(8)))).slice(0, T),
+        h = new Uint8Array(p.flatMap((_) => Array.from(_.slice(8)))).slice(
+          0,
+          g,
+        ),
         D = [];
       for (let _ = 0; _ < u.length; _++) {
-        const S = _ * y;
-        if (S + y > h.length) break;
+        const A = _ * y;
+        if (A + y > h.length) break;
         D.push({
           keyValue: u[_],
-          calibrationStatus: h[S],
-          adcValue: h[S + 1] | (h[S + 2] << 8),
-          currentStroke: h[S + 3] | (h[S + 4] << 8),
+          calibrationStatus: h[A],
+          adcValue: h[A + 1] | (h[A + 2] << 8),
+          currentStroke: h[A + 3] | (h[A + 4] << 8),
         });
       }
       return D;
@@ -795,7 +863,7 @@ const V = 0,
       return (console.error("获取磁轴按键状态失败:", l), []);
     }
   },
-  nt = async (t, i, r) => {
+  at = async (t, i, r) => {
     var a, o, e, c, s, l;
     const n = P(
       E.SET_SIMULATION_TEST_ON,
@@ -806,7 +874,10 @@ const V = 0,
         (s =
           (c =
             (e =
-              (o = (a = t == null ? void 0 : t.collections) == null ? void 0 : a[0]) == null
+              (o =
+                (a = t == null ? void 0 : t.collections) == null
+                  ? void 0
+                  : a[0]) == null
                 ? void 0
                 : o.outputReports) == null
               ? void 0
@@ -819,15 +890,19 @@ const V = 0,
         : l.reportCount) || 32,
     );
     try {
-      const u = j(t, { command: E.SET_SIMULATION_TEST_ON, timeout: 1e3 }, (d) => d);
-      (await t.sendReport(V, n), await u);
+      const u = j(
+        t,
+        { command: E.SET_SIMULATION_TEST_ON, timeout: 1e3 },
+        (m) => m,
+      );
+      (await t.sendReport(F, n), await u);
       const f = Se(r, "模拟测试数据");
       return (t.addEventListener("inputreport", f), !0);
     } catch (u) {
       return (console.error("开启模拟测试失败:", u), !1);
     }
   },
-  at = async (t, i) => {
+  st = async (t, i) => {
     var r, n, a, o, e, c;
     try {
       const s = P(
@@ -839,7 +914,10 @@ const V = 0,
           (e =
             (o =
               (a =
-                (n = (r = t == null ? void 0 : t.collections) == null ? void 0 : r[0]) == null
+                (n =
+                  (r = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : r[0]) == null
                   ? void 0
                   : n.outputReports) == null
                 ? void 0
@@ -851,7 +929,7 @@ const V = 0,
           ? void 0
           : c.reportCount) || 32,
       );
-      return (await t.sendReport(V, s), !0);
+      return (await t.sendReport(F, s), !0);
     } catch (s) {
       return (console.error("结束模拟测试失败:", s), !1);
     }
@@ -869,7 +947,10 @@ const V = 0,
           (s =
             (c =
               (e =
-                (o = (a = t == null ? void 0 : t.collections) == null ? void 0 : a[0]) == null
+                (o =
+                  (a = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : a[0]) == null
                   ? void 0
                   : o.outputReports) == null
                 ? void 0
@@ -881,54 +962,65 @@ const V = 0,
           ? void 0
           : l.reportCount) || 32,
       );
-      return (await t.sendReport(V, u), await new Promise((f) => oe(f, 100)), !0);
+      return (
+        await t.sendReport(F, u),
+        await new Promise((f) => oe(f, 100)),
+        !0
+      );
     } catch (u) {
       return (console.error("恢复出厂设置失败:", u), !1);
     }
   },
-  st = async (t, i) => Ae(t, i, pe.CLEAR_CALIBRATION),
-  ct = async (t, i) => Ae(t, i, pe.RESET_ALL),
+  ct = async (t, i) => Ae(t, i, pe.CLEAR_CALIBRATION),
+  it = async (t, i) => Ae(t, i, pe.RESET_ALL),
   Ne = async (t, i) => {
-    var d, y;
-    const r = (d = A.deviceStorage.deviceInfo) == null ? void 0 : d.frameVersion,
+    var m, y;
+    const r =
+        (m = S.deviceStorage.deviceInfo) == null ? void 0 : m.frameVersion,
       n = 512,
-      a = await C(t, { cmd: E.GET_KEY, contentSize: n, timeout: r === 1 ? 2e3 : 500 }),
-      e = new Uint8Array(a.flatMap((T) => Array.from(T.slice(8)))).slice(0, n),
+      a = await w(t, {
+        cmd: E.GET_KEY,
+        contentSize: n,
+        timeout: r === 1 ? 2e3 : 500,
+      }),
+      e = new Uint8Array(a.flatMap((g) => Array.from(g.slice(8)))).slice(0, n),
       c = [],
       s = 128,
       l = 4;
-    for (let T = 0; T < s; T++) {
-      const m = T * l,
-        p = e[m],
-        g = e[m + 1],
-        h = e[m + 2],
-        D = e[m + 3];
-      c.push({ pageType: p, param1: g, param2: h, param3: D });
+    for (let g = 0; g < s; g++) {
+      const d = g * l,
+        p = e[d],
+        T = e[d + 1],
+        h = e[d + 2],
+        D = e[d + 3];
+      c.push({ pageType: p, param1: T, param2: h, param3: D });
     }
     const u = ne(c, i);
-    A.deviceStorage.keyList = u;
+    S.deviceStorage.keyList = u;
     let f = [];
-    (y = i.wheelKeys) != null && y.length && ((f = Me(c, i)), (A.deviceStorage.wheelKeys = f));
+    (y = i.wheelKeys) != null &&
+      y.length &&
+      ((f = Me(c, i)), (S.deviceStorage.wheelKeys = f));
     try {
-      const { useProtocol: T } = await v(
+      const { useProtocol: g } = await K(
           async () => {
-            const { useProtocol: p } = await import("./layout-default-m1PKe3cP.js").then(
-              (g) => g.q,
-            );
+            const { useProtocol: p } =
+              await import("./layout-default-CyiI7Opn.js").then((T) => T.q);
             return { useProtocol: p };
           },
           __vite__mapDeps([0, 1, 2, 3, 4]),
         ),
-        m = T();
-      ((m.keyList.value = u), (m.wheelKeys.value = f));
-    } catch (T) {
-      console.warn("更新 useProtocol keyList 失败:", T);
+        d = g();
+      ((d.keyList.value = u), (d.wheelKeys.value = f));
+    } catch (g) {
+      console.warn("更新 useProtocol keyList 失败:", g);
     }
     return c;
   },
-  it = async (t, i, ...r) => {
-    var T;
-    const n = (T = A.deviceStorage.deviceInfo) == null ? void 0 : T.frameVersion,
+  lt = async (t, i, ...r) => {
+    var g;
+    const n =
+        (g = S.deviceStorage.deviceInfo) == null ? void 0 : g.frameVersion,
       a = r[0],
       o = 4,
       e = new Uint8Array(8).fill(0);
@@ -937,48 +1029,48 @@ const V = 0,
       (e[2] = 4),
       (e[3] = (a * 4) & 255),
       (e[4] = ((a * 4) >> 8) & 255));
-    const c = await C(t, {
+    const c = await w(t, {
         cmd: E.GET_KEY,
         contentSize: o,
         headerCount: e.length,
         customHeader: e,
         timeout: n === 1 ? 2e3 : 500,
       }),
-      l = new Uint8Array(c.flatMap((m) => Array.from(m.slice(8)))).slice(0, o),
+      l = new Uint8Array(c.flatMap((d) => Array.from(d.slice(8)))).slice(0, o),
       u = { pageType: l[0], param1: l[1], param2: l[2], param3: l[3] },
       f = Z(u);
-    let d = A.deviceStorage.keyList || JSON.parse(JSON.stringify(i.keyList)),
+    let m = S.deviceStorage.keyList || JSON.parse(JSON.stringify(i.keyList)),
       y = !1;
-    for (let m = 0; m < d.length; m++) {
-      for (let p = 0; p < d[m].length; p++)
-        if (d[m][p].value === a) {
-          (f ? (d[m][p].userKey = f) : delete d[m][p].userKey, (y = !0));
+    for (let d = 0; d < m.length; d++) {
+      for (let p = 0; p < m[d].length; p++)
+        if (m[d][p].value === a) {
+          (f ? (m[d][p].userKey = f) : delete m[d][p].userKey, (y = !0));
           break;
         }
       if (y) break;
     }
-    A.deviceStorage.keyList = d;
+    S.deviceStorage.keyList = m;
     try {
-      const { useProtocol: m } = await v(
+      const { useProtocol: d } = await K(
           async () => {
-            const { useProtocol: g } = await import("./layout-default-m1PKe3cP.js").then(
-              (h) => h.q,
-            );
-            return { useProtocol: g };
+            const { useProtocol: T } =
+              await import("./layout-default-CyiI7Opn.js").then((h) => h.q);
+            return { useProtocol: T };
           },
           __vite__mapDeps([0, 1, 2, 3, 4]),
         ),
-        p = m();
-      p.keyList.value = d;
-    } catch (m) {
-      console.warn("更新 useProtocol keyList 失败:", m);
+        p = d();
+      p.keyList.value = m;
+    } catch (d) {
+      console.warn("更新 useProtocol keyList 失败:", d);
     }
     return [u];
   },
-  lt = async (t, i, ...r) => {
+  ut = async (t, i, ...r) => {
     var n;
     try {
-      const a = (n = A.deviceStorage.deviceInfo) == null ? void 0 : n.frameVersion,
+      const a =
+          (n = S.deviceStorage.deviceInfo) == null ? void 0 : n.frameVersion,
         o = r[0],
         e = r[1],
         c = 128,
@@ -986,42 +1078,47 @@ const V = 0,
         l = c * s,
         u = new Uint8Array(l).fill(0);
       for (let f = 0; f < o.length; f++)
-        for (let d = 0; d < o[f].length; d++) {
-          const y = o[f][d];
+        for (let m = 0; m < o[f].length; m++) {
+          const y = o[f][m];
           if (!y) continue;
-          const T = y.value;
-          if (T >= 0 && T < c && y.userKey) {
-            const m = T * s;
-            W(u, m, y.userKey, "键盘按键");
+          const g = y.value;
+          if (g >= 0 && g < c && y.userKey) {
+            const d = g * s;
+            W(u, d, y.userKey, "键盘按键");
           }
         }
       (e &&
         Array.isArray(e) &&
         e.forEach((f) => {
           if (!f || !f.userKey || f.value < 0) return;
-          const d = f.value;
-          if (d >= 0 && d < c) {
-            const y = d * s;
+          const m = f.value;
+          if (m >= 0 && m < c) {
+            const y = m * s;
             W(u, y, f.userKey, "滚轮按键");
           }
         }),
-        await C(t, { cmd: E.SET_KEY, contentSize: l, data: u, timeout: a === 1 ? 2e3 : 1e3 }),
-        (A.deviceStorage.keyList = o),
+        await w(t, {
+          cmd: E.SET_KEY,
+          contentSize: l,
+          data: u,
+          timeout: a === 1 ? 2e3 : 1e3,
+        }),
+        (S.deviceStorage.keyList = o),
         e &&
           Array.isArray(e) &&
-          (i.wheelKeys && (i.wheelKeys = e), (A.deviceStorage.wheelKeys = e)));
+          (i.wheelKeys && (i.wheelKeys = e), (S.deviceStorage.wheelKeys = e)));
       try {
-        const { useProtocol: f } = await v(
+        const { useProtocol: f } = await K(
             async () => {
-              const { useProtocol: y } = await import("./layout-default-m1PKe3cP.js").then(
-                (T) => T.q,
-              );
+              const { useProtocol: y } =
+                await import("./layout-default-CyiI7Opn.js").then((g) => g.q);
               return { useProtocol: y };
             },
             __vite__mapDeps([0, 1, 2, 3, 4]),
           ),
-          d = f();
-        ((d.keyList.value = o), e && Array.isArray(e) && (d.wheelKeys.value = e));
+          m = f();
+        ((m.keyList.value = o),
+          e && Array.isArray(e) && (m.wheelKeys.value = e));
       } catch (f) {
         console.warn("更新 useProtocol keyList 失败:", f);
       }
@@ -1030,65 +1127,73 @@ const V = 0,
       return (console.error("写入按键数据失败:", a), !1);
     }
   },
-  Ke = async (t) => {
+  ve = async (t) => {
     var i, r;
     try {
-      const n = (i = A.deviceStorage.deviceInfo) == null ? void 0 : i.frameVersion,
+      const n =
+          (i = S.deviceStorage.deviceInfo) == null ? void 0 : i.frameVersion,
         a = 512,
-        o = await C(t, {
+        o = await w(t, {
           cmd: E.GET_DEFAULT_FN_KEY_MATRIX,
           contentSize: a,
           maxRetries: 1,
           timeout: n === 1 ? 2e3 : 500,
         }),
-        c = new Uint8Array(o.flatMap((d) => Array.from(d.slice(8)))).slice(0, a),
+        c = new Uint8Array(o.flatMap((m) => Array.from(m.slice(8)))).slice(
+          0,
+          a,
+        ),
         s = [],
         l = [],
         u = 128,
         f = 4;
-      for (let d = 0; d < u; d++) {
-        const y = d * f,
-          T = c[y],
-          m = c[y + 1],
+      for (let m = 0; m < u; m++) {
+        const y = m * f,
+          g = c[y],
+          d = c[y + 1],
           p = c[y + 2],
-          g = c[y + 3];
-        if ((s.push({ pageType: T, param1: m, param2: p, param3: g }), T === 13)) {
-          const D = (m << 16) | (p << 8) | g;
+          T = c[y + 3];
+        if (
+          (s.push({ pageType: g, param1: d, param2: p, param3: T }), g === 13)
+        ) {
+          const D = (d << 16) | (p << 8) | T;
           D > 0 && l.push(D);
         }
-        if (((r = A.deviceStorage.deviceInfo) == null ? void 0 : r.frameVersion) > 0 && T >= 128) {
-          const D = ((T & 127) << 8) | m,
-            _ = (p << 8) | g;
+        if (
+          ((r = S.deviceStorage.deviceInfo) == null ? void 0 : r.frameVersion) >
+            0 &&
+          g >= 128
+        ) {
+          const D = ((g & 127) << 8) | d,
+            _ = (p << 8) | T;
           (D > 0 && l.push(D), _ > 0 && l.push(_));
         }
       }
-      ((A.tempData.defaultFnKeyMatrix = s), (A.tempData.defaultFnFuncIds = l));
+      ((S.tempData.defaultFnKeyMatrix = s), (S.tempData.defaultFnFuncIds = l));
       try {
-        const { useProtocol: d } = await v(
+        const { useProtocol: m } = await K(
             async () => {
-              const { useProtocol: T } = await import("./layout-default-m1PKe3cP.js").then(
-                (m) => m.q,
-              );
-              return { useProtocol: T };
+              const { useProtocol: g } =
+                await import("./layout-default-CyiI7Opn.js").then((d) => d.q);
+              return { useProtocol: g };
             },
             __vite__mapDeps([0, 1, 2, 3, 4]),
           ),
-          y = d();
+          y = m();
         y.defaultFnFuncIds.value = l;
-      } catch (d) {
-        console.warn("更新 useProtocol defaultFnFuncIds 失败:", d);
+      } catch (m) {
+        console.warn("更新 useProtocol defaultFnFuncIds 失败:", m);
       }
       return s;
     } catch (n) {
       (console.warn("读取默认 FN 矩阵失败（设备可能不支持）:", n),
-        (A.tempData.defaultFnKeyMatrix = []),
-        (A.tempData.defaultFnFuncIds = []));
+        (S.tempData.defaultFnKeyMatrix = []),
+        (S.tempData.defaultFnFuncIds = []));
       try {
-        const { useProtocol: a } = await v(
+        const { useProtocol: a } = await K(
             async () => {
-              const { useProtocol: e } = await import("./layout-default-m1PKe3cP.js").then(
-                (c) => c.q,
-              );
+              const { useProtocol: e } =
+                await import("./layout-default-CyiI7Opn.js").then((c) => c.q);
               return { useProtocol: e };
             },
             __vite__mapDeps([0, 1, 2, 3, 4]),
@@ -1099,45 +1204,50 @@ const V = 0,
       return [];
     }
   },
-  ve = async (t, i) => {
+  Ke = async (t, i) => {
     var f;
-    const r = (f = A.deviceStorage.deviceInfo) == null ? void 0 : f.frameVersion,
+    const r =
+        (f = S.deviceStorage.deviceInfo) == null ? void 0 : f.frameVersion,
       n = 512,
-      a = await C(t, { cmd: E.GET_FN_KEY, contentSize: n, timeout: r === 1 ? 2e3 : 500 }),
-      e = new Uint8Array(a.flatMap((d) => Array.from(d.slice(8)))).slice(0, n),
+      a = await w(t, {
+        cmd: E.GET_FN_KEY,
+        contentSize: n,
+        timeout: r === 1 ? 2e3 : 500,
+      }),
+      e = new Uint8Array(a.flatMap((m) => Array.from(m.slice(8)))).slice(0, n),
       c = [],
       s = 128,
       l = 4;
-    for (let d = 0; d < s; d++) {
-      const y = d * l,
-        T = e[y],
-        m = e[y + 1],
+    for (let m = 0; m < s; m++) {
+      const y = m * l,
+        g = e[y],
+        d = e[y + 1],
         p = e[y + 2],
-        g = e[y + 3];
-      c.push({ pageType: T, param1: m, param2: p, param3: g });
+        T = e[y + 3];
+      c.push({ pageType: g, param1: d, param2: p, param3: T });
     }
     const u = ne(c, i);
-    A.deviceStorage.fnKeyList = u;
+    S.deviceStorage.fnKeyList = u;
     try {
-      const { useProtocol: d } = await v(
+      const { useProtocol: m } = await K(
           async () => {
-            const { useProtocol: T } = await import("./layout-default-m1PKe3cP.js").then(
-              (m) => m.q,
-            );
-            return { useProtocol: T };
+            const { useProtocol: g } =
+              await import("./layout-default-CyiI7Opn.js").then((d) => d.q);
+            return { useProtocol: g };
           },
           __vite__mapDeps([0, 1, 2, 3, 4]),
         ),
-        y = d();
+        y = m();
       y.fnKeyList.value = u;
-    } catch (d) {
-      console.warn("更新 useProtocol fnKeyList 失败:", d);
+    } catch (m) {
+      console.warn("更新 useProtocol fnKeyList 失败:", m);
     }
     return c;
   },
-  ut = async (t, i, ...r) => {
-    var T;
-    const n = (T = A.deviceStorage.deviceInfo) == null ? void 0 : T.frameVersion,
+  ft = async (t, i, ...r) => {
+    var g;
+    const n =
+        (g = S.deviceStorage.deviceInfo) == null ? void 0 : g.frameVersion,
       a = r[0],
       o = 4,
       e = new Uint8Array(8).fill(0);
@@ -1146,72 +1256,75 @@ const V = 0,
       (e[2] = 4),
       (e[3] = (a * 4) & 255),
       (e[4] = ((a * 4) >> 8) & 255));
-    const c = await C(t, {
+    const c = await w(t, {
         cmd: E.GET_FN_KEY,
         contentSize: o,
         headerCount: e.length,
         customHeader: e,
         timeout: n === 1 ? 2e3 : 500,
       }),
-      l = new Uint8Array(c.flatMap((m) => Array.from(m.slice(8)))).slice(0, o),
+      l = new Uint8Array(c.flatMap((d) => Array.from(d.slice(8)))).slice(0, o),
       u = { pageType: l[0], param1: l[1], param2: l[2], param3: l[3] },
       f = Z(u);
-    let d = A.deviceStorage.fnKeyList || JSON.parse(JSON.stringify(i.keyList)),
+    let m = S.deviceStorage.fnKeyList || JSON.parse(JSON.stringify(i.keyList)),
       y = !1;
-    for (let m = 0; m < d.length; m++) {
-      for (let p = 0; p < d[m].length; p++)
-        if (d[m][p].value === a) {
-          (f ? (d[m][p].userKey = f) : delete d[m][p].userKey, (y = !0));
+    for (let d = 0; d < m.length; d++) {
+      for (let p = 0; p < m[d].length; p++)
+        if (m[d][p].value === a) {
+          (f ? (m[d][p].userKey = f) : delete m[d][p].userKey, (y = !0));
           break;
         }
       if (y) break;
     }
-    A.deviceStorage.fnKeyList = d;
+    S.deviceStorage.fnKeyList = m;
     try {
-      const { useProtocol: m } = await v(
+      const { useProtocol: d } = await K(
           async () => {
-            const { useProtocol: g } = await import("./layout-default-m1PKe3cP.js").then(
-              (h) => h.q,
-            );
-            return { useProtocol: g };
+            const { useProtocol: T } =
+              await import("./layout-default-CyiI7Opn.js").then((h) => h.q);
+            return { useProtocol: T };
           },
           __vite__mapDeps([0, 1, 2, 3, 4]),
         ),
-        p = m();
-      p.fnKeyList.value = d;
-    } catch (m) {
-      console.warn("更新 useProtocol fnKeyList 失败:", m);
+        p = d();
+      p.fnKeyList.value = m;
+    } catch (d) {
+      console.warn("更新 useProtocol fnKeyList 失败:", d);
     }
     return [u];
   },
-  ft = async (t, i, ...r) => {
+  dt = async (t, i, ...r) => {
     var n;
     try {
       const a = r[0],
-        o = (n = A.deviceStorage.deviceInfo) == null ? void 0 : n.frameVersion,
+        o = (n = S.deviceStorage.deviceInfo) == null ? void 0 : n.frameVersion,
         e = 128,
         c = 4,
         s = e * c,
         l = new Uint8Array(s).fill(0);
       for (let u = 0; u < a.length; u++)
         for (let f = 0; f < a[u].length; f++) {
-          const d = a[u][f];
-          if (!d) continue;
-          const y = d.value;
-          if (y >= 0 && y < e && d.userKey) {
-            const T = y * c;
-            W(l, T, d.userKey, "FN层按键");
+          const m = a[u][f];
+          if (!m) continue;
+          const y = m.value;
+          if (y >= 0 && y < e && m.userKey) {
+            const g = y * c;
+            W(l, g, m.userKey, "FN层按键");
           }
         }
-      (await C(t, { cmd: E.SET_FN_KEY, contentSize: s, data: l, timeout: o === 1 ? 2e3 : 500 }),
-        (A.deviceStorage.fnKeyList = a));
+      (await w(t, {
+        cmd: E.SET_FN_KEY,
+        contentSize: s,
+        data: l,
+        timeout: o === 1 ? 2e3 : 500,
+      }),
+        (S.deviceStorage.fnKeyList = a));
       try {
-        const { useProtocol: u } = await v(
+        const { useProtocol: u } = await K(
             async () => {
-              const { useProtocol: d } = await import("./layout-default-m1PKe3cP.js").then(
-                (y) => y.q,
-              );
-              return { useProtocol: d };
+              const { useProtocol: m } =
+                await import("./layout-default-CyiI7Opn.js").then((y) => y.q);
+              return { useProtocol: m };
             },
             __vite__mapDeps([0, 1, 2, 3, 4]),
           ),
@@ -1227,9 +1340,14 @@ const V = 0,
   },
   Ue = async (t) => {
     var c;
-    const i = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+    const i =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       r = 16,
-      n = await C(t, { cmd: E.GET_LED_EFFECT, contentSize: r, timeout: i === 1 ? 2e3 : 500 }),
+      n = await w(t, {
+        cmd: E.GET_LED_EFFECT,
+        contentSize: r,
+        timeout: i === 1 ? 2e3 : 500,
+      }),
       o = new Uint8Array(n.flatMap((s) => Array.from(s.slice(8)))).slice(0, r),
       e = {
         mode: o[0],
@@ -1248,11 +1366,12 @@ const V = 0,
         checkCodeL: o[14],
         checkCodeH: o[15],
       };
-    return ((A.deviceStorage.ledEffect = e), e);
+    return ((S.deviceStorage.ledEffect = e), e);
   },
   mt = async (t, i, ...r) => {
     var c;
-    const n = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+    const n =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       a = r[0],
       o = 16,
       e = new Uint8Array(o).fill(0);
@@ -1272,52 +1391,76 @@ const V = 0,
       (e[12] = a.effectModeType),
       (e[14] = 170),
       (e[15] = 85),
-      await C(t, { cmd: E.SET_LED_EFFECT, contentSize: o, data: e, timeout: n === 1 ? 2e3 : 500 }),
-      (A.deviceStorage.ledEffect = a),
+      await w(t, {
+        cmd: E.SET_LED_EFFECT,
+        contentSize: o,
+        data: e,
+        timeout: n === 1 ? 2e3 : 500,
+      }),
+      (S.deviceStorage.ledEffect = a),
       !0
     );
   },
   ke = async (t) => {
     var l;
-    const i = (l = A.deviceStorage.deviceInfo) == null ? void 0 : l.frameVersion,
+    const i =
+        (l = S.deviceStorage.deviceInfo) == null ? void 0 : l.frameVersion,
       r = 512,
-      n = await C(t, { cmd: E.GET_CUSTOM_LED_DATA, contentSize: r, timeout: i === 1 ? 2e3 : 500 }),
+      n = await w(t, {
+        cmd: E.GET_CUSTOM_LED_DATA,
+        contentSize: r,
+        timeout: i === 1 ? 2e3 : 500,
+      }),
       o = new Uint8Array(n.flatMap((u) => Array.from(u.slice(8)))).slice(0, r),
       e = [],
       c = 128,
       s = 4;
     for (let u = 0; u < c; u++) {
       const f = u * s,
-        d = o[f],
+        m = o[f],
         y = o[f + 1],
-        T = o[f + 2],
-        m = o[f + 3];
-      e.push({ ledId: d, red: y, green: T, blue: m });
+        g = o[f + 2],
+        d = o[f + 3];
+      e.push({ ledId: m, red: y, green: g, blue: d });
     }
-    return ((A.deviceStorage.customLedData = e), e);
+    return ((S.deviceStorage.customLedData = e), e);
   },
-  dt = async (t, i, ...r) => {
+  yt = async (t, i, ...r) => {
     var c;
-    const n = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+    const n =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       a = r[0],
       o = 512,
       e = new Uint8Array(o).fill(0);
     for (let s = 0; s < a.length && s < 128; s++) {
       const l = s * 4,
         u = a[s];
-      ((e[l] = s), (e[l + 1] = u.red), (e[l + 2] = u.green), (e[l + 3] = u.blue));
+      ((e[l] = s),
+        (e[l + 1] = u.red),
+        (e[l + 2] = u.green),
+        (e[l + 3] = u.blue));
     }
     return (
-      await C(t, { cmd: E.SET_CUSTOM_LED_DATA, contentSize: o, data: e, timeout: 2e3 }),
-      (A.deviceStorage.customLedData = a),
+      await w(t, {
+        cmd: E.SET_CUSTOM_LED_DATA,
+        contentSize: o,
+        data: e,
+        timeout: 2e3,
+      }),
+      (S.deviceStorage.customLedData = a),
       !0
     );
   },
   be = async (t) => {
     var c;
-    const i = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+    const i =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       r = 24,
-      n = await C(t, { cmd: E.GET_LIGHT_BOX, contentSize: r, timeout: i === 1 ? 2e3 : 500 }),
+      n = await w(t, {
+        cmd: E.GET_LIGHT_BOX,
+        contentSize: r,
+        timeout: i === 1 ? 2e3 : 500,
+      }),
       o = new Uint8Array(n.flatMap((s) => Array.from(s.slice(8)))).slice(0, r),
       e = {
         mode: o[0],
@@ -1328,12 +1471,12 @@ const V = 0,
         brightness: o[9],
         speed: o[10],
       };
-    return ((A.deviceStorage.lightBoxData = e), e);
+    return ((S.deviceStorage.lightBoxData = e), e);
   },
-  yt = async (t, i, ...r) => {
+  gt = async (t, i, ...r) => {
     var c;
     const n = r[0],
-      a = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+      a = (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       o = 24,
       e = new Uint8Array(o).fill(0);
     return (
@@ -1344,21 +1487,75 @@ const V = 0,
       (e[8] = n.colorMode),
       (e[9] = n.brightness),
       (e[10] = n.speed),
-      await C(t, { cmd: E.SET_LIGHT_BOX, contentSize: o, data: e, timeout: a === 1 ? 2e3 : 500 }),
-      (A.deviceStorage.lightBoxData = n),
+      await w(t, {
+        cmd: E.SET_LIGHT_BOX,
+        contentSize: o,
+        data: e,
+        timeout: a === 1 ? 2e3 : 500,
+      }),
+      (S.deviceStorage.lightBoxData = n),
       !0
     );
   },
+  Ge = async (t) => {
+    var c;
+    const i =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+      r = 24,
+      n = await w(t, {
+        cmd: E.GET_SIDE_LIGHT,
+        contentSize: r,
+        timeout: i === 1 ? 2e3 : 500,
+      }),
+      o = new Uint8Array(n.flatMap((s) => Array.from(s.slice(8)))).slice(0, r),
+      e = {
+        mode: o[0],
+        red: o[1],
+        green: o[2],
+        blue: o[3],
+        colorMode: o[8],
+        brightness: o[9],
+        speed: o[10],
+      };
+    return ((S.deviceStorage.sideLightData = e), e);
+  },
   Tt = async (t, i, ...r) => {
-    var c, s, l, u, f, d, y, T;
+    var c;
+    const n = r[0],
+      a = (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+      o = 24,
+      e = new Uint8Array(o).fill(0);
+    return (
+      (e[0] = n.mode),
+      (e[1] = n.red),
+      (e[2] = n.green),
+      (e[3] = n.blue),
+      (e[8] = n.colorMode),
+      (e[9] = n.brightness),
+      (e[10] = n.speed),
+      await w(t, {
+        cmd: E.SET_SIDE_LIGHT,
+        contentSize: o,
+        data: e,
+        timeout: a === 1 ? 2e3 : 500,
+      }),
+      (S.deviceStorage.sideLightData = n),
+      !0
+    );
+  },
+  _t = async (t, i, ...r) => {
+    var c, s, l, u, f, m, y, g;
     const n = r[0],
       a = r[1] || 0,
       o =
-        ((d =
+        ((m =
           (f =
             (u =
               (l =
-                (s = (c = t == null ? void 0 : t.collections) == null ? void 0 : c[0]) == null
+                (s =
+                  (c = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : c[0]) == null
                   ? void 0
                   : s.outputReports) == null
                 ? void 0
@@ -1368,26 +1565,28 @@ const V = 0,
             ? void 0
             : f[0]) == null
           ? void 0
-          : d.reportCount) || 32,
+          : m.reportCount) || 32,
       e = [a];
     try {
-      const m = (y = A.deviceStorage.deviceInfo) == null ? void 0 : y.frameVersion,
-        p = (T = A.deviceStorage.deviceInfo) == null ? void 0 : T.lightingVersion;
+      const d =
+          (y = S.deviceStorage.deviceInfo) == null ? void 0 : y.frameVersion,
+        p =
+          (g = S.deviceStorage.deviceInfo) == null ? void 0 : g.lightingVersion;
       if (i.connectType === "USB") {
-        const g = o - 8,
-          h = Math.ceil(n.length / g);
+        const T = o - 8,
+          h = Math.ceil(n.length / T);
         for (let D = 0; D < h; D++) {
-          const _ = new Uint8Array(g).fill(0),
-            S = D * g,
-            M = Math.min(S + g, n.length),
-            L = M - S,
-            I = D * g;
-          for (let w = S; w < M; w++) _[w - S] = n[w];
-          await C(t, {
+          const _ = new Uint8Array(T).fill(0),
+            A = D * T,
+            M = Math.min(A + T, n.length),
+            L = M - A,
+            I = D * T;
+          for (let C = A; C < M; C++) _[C - A] = n[C];
+          await w(t, {
             cmd: E.GET_LED_DATA,
             contentSize: L,
             addrStart: I,
-            timeout: m === 1 ? 2e3 : 50,
+            timeout: d === 1 ? 2e3 : 50,
             data: _,
             otherHeader: e,
           });
@@ -1396,24 +1595,24 @@ const V = 0,
         const h = o - 8,
           D = 2,
           _ = Math.floor(n.length / 4),
-          S = new Uint8Array(_ * D);
+          A = new Uint8Array(_ * D);
         for (let L = 0; L < _; L++) {
           const I = L * 4,
-            w = Q({ r: n[I + 1] || 0, g: n[I + 2] || 0, b: n[I + 3] || 0 }),
-            [O, K] = ee(w);
-          ((S[L * D] = O), (S[L * D + 1] = K));
+            C = Q({ r: n[I + 1] || 0, g: n[I + 2] || 0, b: n[I + 3] || 0 }),
+            [O, v] = ee(C);
+          ((A[L * D] = O), (A[L * D + 1] = v));
         }
-        const M = Math.ceil(S.length / h);
+        const M = Math.ceil(A.length / h);
         for (let L = 0; L < M; L++) {
           const I = L * h,
-            w = Math.min(I + h, S.length),
-            O = w - I,
-            K = L * h,
-            U = S.slice(I, w);
-          await C(t, {
+            C = Math.min(I + h, A.length),
+            O = C - I,
+            v = L * h,
+            U = A.slice(I, C);
+          await w(t, {
             cmd: E.SET_MUSIC_DATA_24G_64_BYTE,
             contentSize: O,
-            addrStart: K,
+            addrStart: v,
             data: U,
             otherHeader: e,
             maxRetries: 0,
@@ -1422,53 +1621,56 @@ const V = 0,
           });
         }
       } else {
-        const g = [];
+        const T = [];
         for (let _ = 0; _ < n.length / 2; _++) {
-          const S = _ * 4,
-            M = Q({ r: n[S + 1], g: n[S + 2], b: n[S + 3] }),
+          const A = _ * 4,
+            M = Q({ r: n[A + 1], g: n[A + 2], b: n[A + 3] }),
             [L, I] = ee(M);
-          g.push(L, I);
+          T.push(L, I);
         }
         const h = o - 4,
-          D = Math.ceil(g.length / h / 2);
+          D = Math.ceil(T.length / h / 2);
         for (let _ = 0; _ < D; _++) {
-          const S = new Uint8Array(h).fill(0),
+          const A = new Uint8Array(h).fill(0),
             M = _ * h,
-            L = Math.min(M + h, g.length);
-          for (let w = M; w < L; w++) S[w - M] = g[w];
+            L = Math.min(M + h, T.length);
+          for (let C = M; C < L; C++) A[C - M] = T[C];
           const I = new Uint8Array(4).fill(0);
           ((I[0] = 170),
             (I[1] = E.SET_MUSIC_DATA),
             (I[2] = _),
             (I[3] = a),
-            await C(t, {
+            await w(t, {
               cmd: E.SET_MUSIC_DATA,
               contentSize: h,
               maxRetries: 0,
               timeout: 5,
-              data: S,
+              data: A,
               headerCount: I.length,
               customHeader: I,
             }));
         }
       }
       return !0;
-    } catch (m) {
-      return (console.error("发送音乐数据失败:", m), !1);
+    } catch (d) {
+      return (console.error("发送音乐数据失败:", d), !1);
     }
   },
-  _t = async (t, i, ...r) => {
-    var s, l, u, f, d, y;
+  pt = async (t, i, ...r) => {
+    var s, l, u, f, m, y;
     const n = r[0] || 0,
       a = r[1] || 0,
       o = r[2] || 0,
       e = r[3] || [],
       c =
         ((y =
-          (d =
+          (m =
             (f =
               (u =
-                (l = (s = t == null ? void 0 : t.collections) == null ? void 0 : s[0]) == null
+                (l =
+                  (s = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : s[0]) == null
                   ? void 0
                   : l.outputReports) == null
                 ? void 0
@@ -1476,68 +1678,75 @@ const V = 0,
               ? void 0
               : f.items) == null
             ? void 0
-            : d[0]) == null
+            : m[0]) == null
           ? void 0
           : y.reportCount) || 32;
     try {
-      const T = new Array(21).fill(0);
-      for (let g = 0; g < Math.min(e.length, 21); g++) T[g] = e[g] & 255;
-      const m = new Uint8Array(c).fill(0);
-      ((m[0] = 170),
-        (m[1] = E.SET_MUSIC_DATA),
-        (m[2] = 0),
-        (m[3] = n & 255),
-        (m[4] = a & 255),
-        (m[5] = o & 255));
-      for (let g = 0; g < 21; g++) m[6 + g] = T[g];
+      const g = new Array(21).fill(0);
+      for (let T = 0; T < Math.min(e.length, 21); T++) g[T] = e[T] & 255;
+      const d = new Uint8Array(c).fill(0);
+      ((d[0] = 170),
+        (d[1] = E.SET_MUSIC_DATA),
+        (d[2] = 0),
+        (d[3] = n & 255),
+        (d[4] = a & 255),
+        (d[5] = o & 255));
+      for (let T = 0; T < 21; T++) d[6 + T] = g[T];
       let p = 0;
-      for (let g = 0; g < 31; g++) p += m[g];
-      return ((m[31] = p & 255), await t.sendReport(0, m), !0);
-    } catch (T) {
-      return (console.error("发送音乐数据失败:", T), !1);
+      for (let T = 0; T < 31; T++) p += d[T];
+      return ((d[31] = p & 255), await t.sendReport(0, d), !0);
+    } catch (g) {
+      return (console.error("发送音乐数据失败:", g), !1);
     }
   },
-  gt = async (t, i, r) => {
-    var d;
+  St = async (t, i, r) => {
+    var m;
     const e = new Uint8Array(512);
     for (let y = 0; y < 128; y++) {
-      const T = y * 4;
-      ((e[T] = y), (e[T + 1] = 0), (e[T + 2] = 0), (e[T + 3] = 0));
+      const g = y * 4;
+      ((e[g] = y), (e[g + 1] = 0), (e[g + 2] = 0), (e[g + 3] = 0));
     }
-    const c = (d = A.deviceStorage.deviceInfo) == null ? void 0 : d.frameVersion,
-      s = await C(t, {
+    const c =
+        (m = S.deviceStorage.deviceInfo) == null ? void 0 : m.frameVersion,
+      s = await w(t, {
         cmd: E.GET_ALL_LIGHTS_RGB,
         contentSize: 512,
         data: e,
         abortSignal: r,
         timeout: c === 1 ? 2e3 : 500,
       }),
-      u = new Uint8Array(s.flatMap((y) => Array.from(y.slice(8)))).slice(0, 512),
+      u = new Uint8Array(s.flatMap((y) => Array.from(y.slice(8)))).slice(
+        0,
+        512,
+      ),
       f = [];
     for (let y = 0; y < 128; y++) {
-      const T = y * 4,
-        m = u[T],
-        p = u[T + 1],
-        g = u[T + 2],
-        h = u[T + 3];
-      f.push({ ledId: m, red: p, green: g, blue: h });
+      const g = y * 4,
+        d = u[g],
+        p = u[g + 1],
+        T = u[g + 2],
+        h = u[g + 3];
+      f.push({ ledId: d, red: p, green: T, blue: h });
     }
     return f;
   },
-  pt = async (t, i, r, n) => {
-    var T, m, p, g, h, D, _;
+  At = async (t, i, r, n) => {
+    var g, d, p, T, h, D, _;
     const o =
         (((D =
           (h =
-            (g =
+            (T =
               (p =
-                (m = (T = t == null ? void 0 : t.collections) == null ? void 0 : T[0]) == null
+                (d =
+                  (g = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : g[0]) == null
                   ? void 0
-                  : m.outputReports) == null
+                  : d.outputReports) == null
                 ? void 0
                 : p[0]) == null
               ? void 0
-              : g.items) == null
+              : T.items) == null
             ? void 0
             : h[0]) == null
           ? void 0
@@ -1547,13 +1756,14 @@ const V = 0,
       s = Math.ceil(c / o),
       l = [];
     let u = 0;
-    for (let S = 0; S < s; S++) {
-      if (n != null && n.aborted) return Promise.reject({ allLightsRgb: [], battery: 0 });
+    for (let A = 0; A < s; A++) {
+      if (n != null && n.aborted)
+        return Promise.reject({ allLightsRgb: [], battery: 0 });
       const M = new Uint8Array(4).fill(0);
-      ((M[0] = 170), (M[1] = E.GET_ALL_LIGHTS_RGB_24G), (M[2] = S), (M[3] = 0));
+      ((M[0] = 170), (M[1] = E.GET_ALL_LIGHTS_RGB_24G), (M[2] = A), (M[3] = 0));
       const L = new Uint8Array(o).fill(0),
-        I = (_ = A.deviceStorage.deviceInfo) == null ? void 0 : _.frameVersion,
-        w = await C(t, {
+        I = (_ = S.deviceStorage.deviceInfo) == null ? void 0 : _.frameVersion,
+        C = await w(t, {
           cmd: E.GET_ALL_LIGHTS_RGB_24G,
           contentSize: o,
           data: L,
@@ -1562,34 +1772,40 @@ const V = 0,
           abortSignal: n,
           timeout: I === 1 ? 2e3 : 500,
         });
-      l.push(...w);
+      l.push(...C);
     }
     l.length > 0 && (u = l[0][3]);
-    const d = new Uint8Array(l.flatMap((S) => Array.from(S.slice(4)))).slice(0, r * e),
+    const m = new Uint8Array(l.flatMap((A) => Array.from(A.slice(4)))).slice(
+        0,
+        r * e,
+      ),
       y = [];
-    for (let S = 0; S < r; S++) {
-      const M = S * e,
-        L = (d[M] << 8) | d[M + 1],
+    for (let A = 0; A < r; A++) {
+      const M = A * e,
+        L = (m[M] << 8) | m[M + 1],
         I = ((L >> 11) & 31) << 3,
-        w = ((L >> 5) & 63) << 2,
+        C = ((L >> 5) & 63) << 2,
         O = (L & 31) << 3;
-      y.push({ red: I, green: w, blue: O });
+      y.push({ red: I, green: C, blue: O });
     }
     return { allLightsRgb: y, battery: u };
   },
-  St = async (t, i, r, n) => {
-    var m, p, g, h, D, _;
+  Et = async (t, i, r, n) => {
+    var d, p, T, h, D, _;
     if (!r.length) return { allLightsRgb: [], battery: 0 };
     const e =
         (((_ =
           (D =
             (h =
-              (g =
-                (p = (m = t == null ? void 0 : t.collections) == null ? void 0 : m[0]) == null
+              (T =
+                (p =
+                  (d = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : d[0]) == null
                   ? void 0
                   : p.outputReports) == null
                 ? void 0
-                : g[0]) == null
+                : T[0]) == null
               ? void 0
               : h.items) == null
             ? void 0
@@ -1599,11 +1815,11 @@ const V = 0,
       c = 2;
     if (Math.floor(e / c) <= 0) return { allLightsRgb: [], battery: 0 };
     const l = new Uint8Array(r.length * c);
-    r.forEach((S, M) => {
+    r.forEach((A, M) => {
       const L = M * c;
-      ((l[L] = S & 255), (l[L + 1] = (S >> 8) & 255));
+      ((l[L] = A & 255), (l[L + 1] = (A >> 8) & 255));
     });
-    const u = await C(t, {
+    const u = await w(t, {
       cmd: E.GET_ALL_LIGHTS_RGB_24G_64_BYTE,
       contentSize: l.length,
       data: l,
@@ -1613,21 +1829,25 @@ const V = 0,
     });
     let f = 0;
     u.length > 0 && (f = u[0][5]);
-    const y = new Uint8Array(u.flatMap((S) => Array.from(S.slice(8)))).slice(0, r.length * c),
-      T = [];
-    for (let S = 0; S < r.length; S++) {
-      const M = S * c,
+    const y = new Uint8Array(u.flatMap((A) => Array.from(A.slice(8)))).slice(
+        0,
+        r.length * c,
+      ),
+      g = [];
+    for (let A = 0; A < r.length; A++) {
+      const M = A * c,
         L = (y[M] << 8) | y[M + 1],
         I = ((L >> 11) & 31) << 3,
-        w = ((L >> 5) & 63) << 2,
+        C = ((L >> 5) & 63) << 2,
         O = (L & 31) << 3;
-      T.push({ ledId: r[S], red: I, green: w, blue: O });
+      g.push({ ledId: r[A], red: I, green: C, blue: O });
     }
-    return { allLightsRgb: T, battery: f };
+    return { allLightsRgb: g, battery: f };
   },
-  At = async (t, i, r = {}) => {
+  ht = async (t, i, r = {}) => {
     var s;
-    const n = (s = A.deviceStorage.deviceInfo) == null ? void 0 : s.frameVersion,
+    const n =
+        (s = S.deviceStorage.deviceInfo) == null ? void 0 : s.frameVersion,
       { mode: a, bgRGB: o, textRGB: e, type: c } = r;
     try {
       const l = new Uint8Array(8).fill(0);
@@ -1640,7 +1860,7 @@ const V = 0,
         (l[5] = (e == null ? void 0 : e.b) || 0),
         (l[6] = c || 0),
         (l[7] = a || 0),
-        await C(t, {
+        await w(t, {
           cmd: E.SET_DOT_MATRIX_MODE,
           contentSize: 8,
           data: l,
@@ -1652,9 +1872,10 @@ const V = 0,
       return (console.error("设置点阵屏内置模式失败:", l), !1);
     }
   },
-  Et = async (t, i, ...r) => {
-    var y, T, m, p, g, h, D;
-    const n = (y = A.deviceStorage.deviceInfo) == null ? void 0 : y.frameVersion,
+  Dt = async (t, i, ...r) => {
+    var y, g, d, p, T, h, D;
+    const n =
+        (y = S.deviceStorage.deviceInfo) == null ? void 0 : y.frameVersion,
       a = r[0],
       o = r[1],
       e = typeof r[2] == "function" ? r[2] : void 0,
@@ -1666,25 +1887,28 @@ const V = 0,
     const f =
         (((D =
           (h =
-            (g =
+            (T =
               (p =
-                (m = (T = l == null ? void 0 : l.collections) == null ? void 0 : T[0]) == null
+                (d =
+                  (g = l == null ? void 0 : l.collections) == null
+                    ? void 0
+                    : g[0]) == null
                   ? void 0
-                  : m.outputReports) == null
+                  : d.outputReports) == null
                 ? void 0
                 : p[0]) == null
               ? void 0
-              : g.items) == null
+              : T.items) == null
             ? void 0
             : h[0]) == null
           ? void 0
           : D.reportCount) || 4104) - 8,
-      d = Math.ceil(s.length / f);
-    for (let _ = 0; _ < d; _++) {
-      const S = new Uint8Array(f).fill(0),
+      m = Math.ceil(s.length / f);
+    for (let _ = 0; _ < m; _++) {
+      const A = new Uint8Array(f).fill(0),
         M = _ * f,
         L = Math.min(M + f, s.length);
-      for (let w = M; w < L; w++) S[w - M] = s[w];
+      for (let C = M; C < L; C++) A[C - M] = s[C];
       const I = new Uint8Array(8).fill(0);
       if (
         ((I[0] = 170),
@@ -1693,82 +1917,92 @@ const V = 0,
         (I[3] = _ & 255),
         (I[4] = ((s.length / f) >> 8) & 255),
         (I[5] = (s.length / f + 1) & 255),
-        await C(l, {
+        await w(l, {
           cmd: E.SET_LED_DATA,
           contentSize: f,
-          data: S,
+          data: A,
           headerCount: I.length,
           customHeader: I,
           timeout: n === 1 ? 2e3 : 500,
         }),
         e)
       ) {
-        const w = Math.floor(((_ + 1) / d) * 100);
-        e(Math.min(w, 99));
+        const C = Math.floor(((_ + 1) / m) * 100);
+        e(Math.min(C, 99));
       }
     }
     return !0;
   },
-  Ge = async (t) => {
+  Ve = async (t) => {
     var s, l;
-    const i = (s = A.deviceStorage.deviceInfo) == null ? void 0 : s.frameVersion,
-      r = await C(t, {
+    const i =
+        (s = S.deviceStorage.deviceInfo) == null ? void 0 : s.frameVersion,
+      r = await w(t, {
         cmd: E.GET_MACRO,
         contentSize: 400,
         addrStart: 0,
         timeout: i === 1 ? 2e3 : 500,
       }),
-      a = new Uint8Array(r.flatMap((u) => Array.from(u.slice(8)))).slice(0, 400),
-      o = ((l = A == null ? void 0 : A.deviceStorage) == null ? void 0 : l.macroDataList) || [],
+      a = new Uint8Array(r.flatMap((u) => Array.from(u.slice(8)))).slice(
+        0,
+        400,
+      ),
+      o =
+        ((l = S == null ? void 0 : S.deviceStorage) == null
+          ? void 0
+          : l.macroDataList) || [],
       e = [],
       c = 100;
     for (let u = 0; u < c; u++) {
       const f = u * 4,
-        d = a.slice(f, f + 4),
-        y = d[0] | (d[1] << 8) | (d[2] << 16) | (d[3] << 24);
+        m = a.slice(f, f + 4),
+        y = m[0] | (m[1] << 8) | (m[2] << 16) | (m[3] << 24);
       if (y !== 0)
         try {
-          const T = await C(t, {
+          const g = await w(t, {
               cmd: E.GET_MACRO,
               contentSize: 4,
               addrStart: y,
               timeout: i === 1 ? 2e3 : 500,
             }),
-            p = new Uint8Array(T.flatMap((S) => Array.from(S.slice(8)))).slice(0, 4),
-            g = p[0] | (p[1] << 8),
-            h = Math.floor(g / 2),
+            p = new Uint8Array(g.flatMap((A) => Array.from(A.slice(8)))).slice(
+              0,
+              4,
+            ),
+            T = p[0] | (p[1] << 8),
+            h = Math.floor(T / 2),
             D = [];
           if (h > 0) {
-            const S = h * 4,
-              M = await C(t, {
+            const A = h * 4,
+              M = await w(t, {
                 cmd: E.GET_MACRO,
-                contentSize: S,
+                contentSize: A,
                 addrStart: y + 4,
                 timeout: i === 1 ? 2e3 : 500,
               }),
               L = new Uint8Array(M.flatMap((I) => Array.from(I.slice(8))));
             for (let I = 0; I < h; I++) {
-              const w = I * 4,
-                O = L.slice(w, w + 4),
-                K = O[0],
+              const C = I * 4,
+                O = L.slice(C, C + 4),
+                v = O[0],
                 U = O[1],
                 x = O[2],
                 k = O[3],
                 b = (k & 128) !== 0,
                 N = (k >> 4) & 7,
-                G = K | (U << 8);
+                G = v | (U << 8);
               D.push({ isPress: b, actionType: N, keyCode: x, delay: G });
             }
           }
-          const _ = o.find((S) => S.macroId === u);
+          const _ = o.find((A) => A.macroId === u);
           e.push({ macroId: u, name: _ == null ? void 0 : _.name, actions: D });
-        } catch (T) {
-          console.warn(`读取宏ID ${u} 失败:`, T);
+        } catch (g) {
+          console.warn(`读取宏ID ${u} 失败:`, g);
         }
     }
-    return ((A.deviceStorage.macroDataList = e), e);
+    return ((S.deviceStorage.macroDataList = e), e);
   },
-  ht = async (t, i, ...r) => {
+  It = async (t, i, ...r) => {
     var u;
     const n = r[0];
     for (const f of n)
@@ -1778,34 +2012,37 @@ const V = 0,
     let o = 400;
     const e = [];
     for (const f of n) {
-      const { macroId: d, actions: y } = f,
-        T = y.length;
-      if (T === 0) continue;
-      const m = 4 + T * 4,
-        p = new Uint8Array(m).fill(0),
-        g = T * 2;
-      ((p[0] = g & 255), (p[1] = (g >> 8) & 255), (p[2] = 0), (p[3] = 0));
-      for (let D = 0; D < T; D++) {
+      const { macroId: m, actions: y } = f,
+        g = y.length;
+      if (g === 0) continue;
+      const d = 4 + g * 4,
+        p = new Uint8Array(d).fill(0),
+        T = g * 2;
+      ((p[0] = T & 255), (p[1] = (T >> 8) & 255), (p[2] = 0), (p[3] = 0));
+      for (let D = 0; D < g; D++) {
         const _ = y[D],
-          S = 4 + D * 4;
-        ((p[S] = _.delay & 255), (p[S + 1] = (_.delay >> 8) & 255), (p[S + 2] = _.keyCode & 255));
+          A = 4 + D * 4;
+        ((p[A] = _.delay & 255),
+          (p[A + 1] = (_.delay >> 8) & 255),
+          (p[A + 2] = _.keyCode & 255));
         let M = 0;
         (_.actionType === 1 || _.actionType === 2
           ? (M = _.isPress ? 144 : 16)
           : (M = _.isPress ? 176 : 48),
-          (p[S + 3] = M));
+          (p[A + 3] = M));
       }
-      const h = d * 4;
+      const h = m * 4;
       (h + 3 < a.length &&
         ((a[h] = o & 255),
         (a[h + 1] = (o >> 8) & 255),
         (a[h + 2] = (o >> 16) & 255),
         (a[h + 3] = (o >> 24) & 255)),
-        e.push({ macroId: d, data: p, size: m }),
-        (o += m));
+        e.push({ macroId: m, data: p, size: d }),
+        (o += d));
     }
-    const c = (u = A.deviceStorage.deviceInfo) == null ? void 0 : u.frameVersion;
-    await C(t, {
+    const c =
+      (u = S.deviceStorage.deviceInfo) == null ? void 0 : u.frameVersion;
+    await w(t, {
       cmd: E.SET_MACRO,
       contentSize: 400,
       isNeedLastPacketFlag: !1,
@@ -1814,12 +2051,12 @@ const V = 0,
       timeout: c === 1 ? 2e3 : 500,
     });
     const s = 400,
-      l = e.reduce((f, d) => f + d.size, 0);
+      l = e.reduce((f, m) => f + m.size, 0);
     if (l > 0) {
       const f = new Uint8Array(l);
-      let d = 0;
-      for (const y of e) (f.set(y.data, d), (d += y.size));
-      await C(t, {
+      let m = 0;
+      for (const y of e) (f.set(y.data, m), (m += y.size));
+      await w(t, {
         cmd: E.SET_MACRO,
         contentSize: l,
         isNeedLastPacketFlag: !0,
@@ -1828,89 +2065,103 @@ const V = 0,
         timeout: c === 1 ? 2e3 : 500,
       });
     }
-    return ((A.deviceStorage.macroDataList = n), !0);
+    return ((S.deviceStorage.macroDataList = n), !0);
   },
   Fe = async (t) => {
-    var d, y;
-    const i = (d = A.deviceStorage.deviceInfo) == null ? void 0 : d.frameVersion,
+    var m, y;
+    const i =
+        (m = S.deviceStorage.deviceInfo) == null ? void 0 : m.frameVersion,
       r = 1024,
-      n = await C(t, { cmd: E.GET_MAGNETIC_AXIS_RT, contentSize: r, timeout: i === 1 ? 2e3 : 500 }),
-      o = new Uint8Array(n.flatMap((T) => Array.from(T.slice(8)))).slice(0, r),
-      e = ((y = A.deviceStorage.deviceInfo) == null ? void 0 : y.rtPrecision) ?? 0,
+      n = await w(t, {
+        cmd: E.GET_MAGNETIC_AXIS_RT,
+        contentSize: r,
+        timeout: i === 1 ? 2e3 : 500,
+      }),
+      o = new Uint8Array(n.flatMap((g) => Array.from(g.slice(8)))).slice(0, r),
+      e =
+        ((y = S.deviceStorage.deviceInfo) == null ? void 0 : y.rtPrecision) ??
+        0,
       c = e > 0 ? 1e3 : 100,
       s = e === 2 ? 1e3 : 100,
       l = [],
       u = 128,
       f = 8;
-    for (let T = 0; T < u; T++) {
-      const m = T * f,
-        p = o[m],
-        g = o[m + 1],
-        h = (g & 1) !== 0,
-        D = (g & 2) !== 0,
-        _ = o[m + 2] | (o[m + 3] << 8),
-        S = o[m + 4] | (o[m + 5] << 8),
-        M = o[m + 6] | (o[m + 7] << 8);
+    for (let g = 0; g < u; g++) {
+      const d = g * f,
+        p = o[d],
+        T = o[d + 1],
+        h = (T & 1) !== 0,
+        D = (T & 2) !== 0,
+        _ = o[d + 2] | (o[d + 3] << 8),
+        A = o[d + 4] | (o[d + 5] << 8),
+        M = o[d + 6] | (o[d + 7] << 8);
       l.push({
         axisType: p,
         isWholeFast: h,
         isRampageMode: D,
         triggerKeyStroke: _ / s,
-        pressRT: S / c,
+        pressRT: A / c,
         releaseRT: M / c,
       });
     }
     return (
-      (A.deviceStorage.magneticAxisRT = l),
-      A.deviceStorage.magneticAxisRTConfig ||
-        (A.deviceStorage.magneticAxisRTConfig = { currentModeName: "custom", customModeRT: l }),
+      (S.deviceStorage.magneticAxisRT = l),
+      S.deviceStorage.magneticAxisRTConfig ||
+        (S.deviceStorage.magneticAxisRTConfig = {
+          currentModeName: "custom",
+          customModeRT: l,
+        }),
       l
     );
   },
-  Dt = async (t, i, ...r) => {
-    var d, y;
-    const n = (d = A.deviceStorage.deviceInfo) == null ? void 0 : d.frameVersion,
+  Lt = async (t, i, ...r) => {
+    var m, y;
+    const n =
+        (m = S.deviceStorage.deviceInfo) == null ? void 0 : m.frameVersion,
       a = r[0],
       o = 1024,
       e = new Uint8Array(o).fill(0),
-      c = ((y = A.deviceStorage.deviceInfo) == null ? void 0 : y.rtPrecision) ?? 0,
+      c =
+        ((y = S.deviceStorage.deviceInfo) == null ? void 0 : y.rtPrecision) ??
+        0,
       s = c > 0 ? 1e3 : 100,
       l = c === 2 ? 1e3 : 100,
       u = 128,
       f = 8;
-    for (let T = 0; T < u && T < a.length; T++) {
-      const m = T * f,
-        p = a[T];
-      let g = 0;
-      (p.isWholeFast && (g |= 1), p.isRampageMode && (g |= 2));
+    for (let g = 0; g < u && g < a.length; g++) {
+      const d = g * f,
+        p = a[g];
+      let T = 0;
+      (p.isWholeFast && (T |= 1), p.isRampageMode && (T |= 2));
       const h = Math.round(p.triggerKeyStroke * l),
         D = Math.round(p.pressRT * s),
         _ = Math.round(p.releaseRT * s);
-      ((e[m] = p.axisType),
-        (e[m + 1] = g),
-        (e[m + 2] = h & 255),
-        (e[m + 3] = (h >> 8) & 255),
-        (e[m + 4] = D & 255),
-        (e[m + 5] = (D >> 8) & 255),
-        (e[m + 6] = _ & 255),
-        (e[m + 7] = (_ >> 8) & 255));
+      ((e[d] = p.axisType),
+        (e[d + 1] = T),
+        (e[d + 2] = h & 255),
+        (e[d + 3] = (h >> 8) & 255),
+        (e[d + 4] = D & 255),
+        (e[d + 5] = (D >> 8) & 255),
+        (e[d + 6] = _ & 255),
+        (e[d + 7] = (_ >> 8) & 255));
     }
     return (
-      await C(t, {
+      await w(t, {
         cmd: E.SET_MAGNETIC_AXIS_RT,
         contentSize: o,
         data: e,
         timeout: n === 1 ? 2e3 : 500,
       }),
-      (A.deviceStorage.magneticAxisRT = a),
+      (S.deviceStorage.magneticAxisRT = a),
       !0
     );
   },
-  Ve = async (t) => {
+  Pe = async (t) => {
     var s;
-    const i = (s = A.deviceStorage.deviceInfo) == null ? void 0 : s.frameVersion,
+    const i =
+        (s = S.deviceStorage.deviceInfo) == null ? void 0 : s.frameVersion,
       r = 64 * 16,
-      n = await C(t, {
+      n = await w(t, {
         cmd: E.GET_MAGNETIC_AXIS_DKS_DATA,
         contentSize: r,
         timeout: i === 1 ? 2e3 : 500,
@@ -1920,37 +2171,38 @@ const V = 0,
       c = 16;
     for (let l = 0; l < 64; l++) {
       const u = l * c;
-      if (o[u] === 0 && o[u + 1] === 0 && o[u + 2] === 0 && o[u + 3] === 0) continue;
+      if (o[u] === 0 && o[u + 1] === 0 && o[u + 2] === 0 && o[u + 3] === 0)
+        continue;
       const f = o[u],
-        d = o[u + 1],
+        m = o[u + 1],
         y = o[u + 2],
-        T = o[u + 3],
-        m = o[u + 5],
+        g = o[u + 3],
+        d = o[u + 5],
         p = o[u + 7],
-        g = o[u + 9],
+        T = o[u + 9],
         h = o[u + 11],
         D = o[u + 12],
         _ = o[u + 13],
-        S = o[u + 14],
+        A = o[u + 14],
         M = o[u + 15],
         L = (N) => ({ single: N & 15, hold: (N & 240) >> 4 }),
         I = L(D),
-        w = L(_),
-        O = L(S),
-        K = L(M),
-        U = [I, w, O, K].map((N) => (N.single & 1 ? 1 : N.hold & 1 ? 2 : 0)),
-        x = [I, w, O, K].map((N) => (N.single & 2 ? 1 : N.hold & 2 ? 2 : 0)),
-        k = [I, w, O, K].map((N) => (N.single & 4 ? 1 : N.hold & 4 ? 2 : 0)),
-        b = [I, w, O, K].map((N) => (N.single & 8 ? 1 : N.hold & 8 ? 2 : 0));
+        C = L(_),
+        O = L(A),
+        v = L(M),
+        U = [I, C, O, v].map((N) => (N.single & 1 ? 1 : N.hold & 1 ? 2 : 0)),
+        x = [I, C, O, v].map((N) => (N.single & 2 ? 1 : N.hold & 2 ? 2 : 0)),
+        k = [I, C, O, v].map((N) => (N.single & 4 ? 1 : N.hold & 4 ? 2 : 0)),
+        b = [I, C, O, v].map((N) => (N.single & 8 ? 1 : N.hold & 8 ? 2 : 0));
       e.push({
         index: l,
         makeValue1: f,
-        makeValue2: d,
+        makeValue2: m,
         breakValue1: y,
-        breakValue2: T,
-        action1: m,
+        breakValue2: g,
+        action1: d,
         action2: p,
-        action3: g,
+        action3: T,
         action4: h,
         action1States: U,
         action2States: x,
@@ -1958,11 +2210,12 @@ const V = 0,
         action4States: b,
       });
     }
-    return ((A.deviceStorage.magneticAxisDKS = e), e);
+    return ((S.deviceStorage.magneticAxisDKS = e), e);
   },
-  It = async (t, i, ...r) => {
+  Mt = async (t, i, ...r) => {
     var c;
-    const n = (c = A.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
+    const n =
+        (c = S.deviceStorage.deviceInfo) == null ? void 0 : c.frameVersion,
       a = r[0],
       o = 64 * 16,
       e = new Uint8Array(o).fill(0);
@@ -1987,43 +2240,51 @@ const V = 0,
           (e[l + 10] = 0));
         const u = [0, 0, 0, 0];
         for (let f = 0; f < 4; f++) {
-          let d = 0,
+          let m = 0,
             y = 0;
-          (s.action1States && s.action1States[f] === 1 && (d |= 1),
+          (s.action1States && s.action1States[f] === 1 && (m |= 1),
             s.action1States && s.action1States[f] === 2 && (y |= 1),
-            s.action2States && s.action2States[f] === 1 && (d |= 2),
+            s.action2States && s.action2States[f] === 1 && (m |= 2),
             s.action2States && s.action2States[f] === 2 && (y |= 2),
-            s.action3States && s.action3States[f] === 1 && (d |= 4),
+            s.action3States && s.action3States[f] === 1 && (m |= 4),
             s.action3States && s.action3States[f] === 2 && (y |= 4),
-            s.action4States && s.action4States[f] === 1 && (d |= 8),
+            s.action4States && s.action4States[f] === 1 && (m |= 8),
             s.action4States && s.action4States[f] === 2 && (y |= 8),
-            (u[f] = d | (y << 4)));
+            (u[f] = m | (y << 4)));
         }
-        ((e[l + 12] = u[0]), (e[l + 13] = u[1]), (e[l + 14] = u[2]), (e[l + 15] = u[3]));
+        ((e[l + 12] = u[0]),
+          (e[l + 13] = u[1]),
+          (e[l + 14] = u[2]),
+          (e[l + 15] = u[3]));
       }),
-      await C(t, {
+      await w(t, {
         cmd: E.SET_MAGNETIC_AXIS_DKS_DATA,
         contentSize: o,
         data: e,
         timeout: n === 1 ? 2e3 : 500,
       }),
-      (A.deviceStorage.magneticAxisDKS = a),
+      (S.deviceStorage.magneticAxisDKS = a),
       !0
     );
   },
-  Lt = async (t, i) => {
+  wt = async (t, i) => {
     var r;
     try {
-      const n = (r = A.deviceStorage.deviceInfo) == null ? void 0 : r.frameVersion;
-      return (await C(t, { cmd: E.CLEAR_LED_DATA, timeout: n === 1 ? 2e3 : 500 }), !0);
+      const n =
+        (r = S.deviceStorage.deviceInfo) == null ? void 0 : r.frameVersion;
+      return (
+        await w(t, { cmd: E.CLEAR_LED_DATA, timeout: n === 1 ? 2e3 : 500 }),
+        !0
+      );
     } catch (n) {
       return (console.error("清除LED数据失败:", n), !1);
     }
   },
-  Mt = async (t, i, ...r) => {
+  Ct = async (t, i, ...r) => {
     var n;
     try {
-      const a = (n = A.deviceStorage.deviceInfo) == null ? void 0 : n.frameVersion,
+      const a =
+          (n = S.deviceStorage.deviceInfo) == null ? void 0 : n.frameVersion,
         o = r[0],
         e = r[1] || !1,
         c = e ? await z(t.productId) : t;
@@ -2031,7 +2292,7 @@ const V = 0,
       if (!o || o.length === 0) return (console.error("无效的rgbData参数"), !1);
       const s = o.length;
       return (
-        await C(c, {
+        await w(c, {
           cmd: E.SET_LED_DATA,
           contentSize: s,
           data: o,
@@ -2045,9 +2306,10 @@ const V = 0,
       return (console.error("设置点阵屏同步动画失败:", a), !1);
     }
   },
-  wt = async (t, i, ...r) => {
-    var y, T, m, p, g, h, D;
-    const n = (y = A.deviceStorage.deviceInfo) == null ? void 0 : y.frameVersion,
+  Rt = async (t, i, ...r) => {
+    var y, g, d, p, T, h, D;
+    const n =
+        (y = S.deviceStorage.deviceInfo) == null ? void 0 : y.frameVersion,
       a = r[0],
       o = r[1],
       e = typeof r[2] == "function" ? r[2] : void 0,
@@ -2059,25 +2321,28 @@ const V = 0,
     const f =
         (((D =
           (h =
-            (g =
+            (T =
               (p =
-                (m = (T = l == null ? void 0 : l.collections) == null ? void 0 : T[0]) == null
+                (d =
+                  (g = l == null ? void 0 : l.collections) == null
+                    ? void 0
+                    : g[0]) == null
                   ? void 0
-                  : m.outputReports) == null
+                  : d.outputReports) == null
                 ? void 0
                 : p[0]) == null
               ? void 0
-              : g.items) == null
+              : T.items) == null
             ? void 0
             : h[0]) == null
           ? void 0
           : D.reportCount) || 4104) - 8,
-      d = Math.ceil(s.length / f);
-    for (let _ = 0; _ < d; _++) {
-      const S = new Uint8Array(f).fill(0),
+      m = Math.ceil(s.length / f);
+    for (let _ = 0; _ < m; _++) {
+      const A = new Uint8Array(f).fill(0),
         M = _ * f,
         L = Math.min(M + f, s.length);
-      for (let w = M; w < L; w++) S[w - M] = s[w];
+      for (let C = M; C < L; C++) A[C - M] = s[C];
       const I = new Uint8Array(8).fill(0);
       if (
         ((I[0] = 170),
@@ -2086,31 +2351,33 @@ const V = 0,
         (I[3] = _ & 255),
         (I[4] = ((s.length / f) >> 8) & 255),
         (I[5] = (s.length / f + 1) & 255),
-        await C(l, {
+        await w(l, {
           cmd: E.SET_LED_USER_ANIMATION,
           contentSize: f,
-          data: S,
+          data: A,
           headerCount: I.length,
           customHeader: I,
           timeout: n === 1 ? 2e3 : 500,
         }),
         e)
       ) {
-        const w = Math.floor(((_ + 1) / d) * 100);
-        e(Math.min(w, 99));
+        const C = Math.floor(((_ + 1) / m) * 100);
+        e(Math.min(C, 99));
       }
     }
     return !0;
   },
-  Ct = async (t, i, ...r) => {
+  Ot = async (t, i, ...r) => {
     var e;
-    const n = (e = A.deviceStorage.deviceInfo) == null ? void 0 : e.frameVersion,
+    const n =
+        (e = S.deviceStorage.deviceInfo) == null ? void 0 : e.frameVersion,
       a = r[0],
       o = r[1];
     try {
       const c = new Date(a);
       if (isNaN(c.getTime())) return (console.error("无效的时间格式:", a), !1);
-      if (o < 0 || o > 6) return (console.error("无效的星期参数，应为0-6:", o), !1);
+      if (o < 0 || o > 6)
+        return (console.error("无效的星期参数，应为0-6:", o), !1);
       const s = new Uint8Array(10).fill(0);
       return (
         (s[0] = 58),
@@ -2123,36 +2390,44 @@ const V = 0,
         (s[7] = c.getMinutes()),
         (s[8] = c.getSeconds()),
         (s[9] = o),
-        await C(t, { cmd: E.SET_TEMPORARY_COMMAND_DATA, data: s, timeout: n === 1 ? 2e3 : 500 }),
+        await w(t, {
+          cmd: E.SET_TEMPORARY_COMMAND_DATA,
+          data: s,
+          timeout: n === 1 ? 2e3 : 500,
+        }),
         !0
       );
     } catch (c) {
       return (console.error("设置点阵屏时间失败:", c), !1);
     }
   },
-  Rt = async (t, i, ...r) => {
+  Nt = async (t, i, ...r) => {
     var e, c, s, l, u, f;
     const n = r[0],
       a = r[1],
       o = typeof r[2] == "function" ? r[2] : void 0;
     try {
-      if (!n || !Array.isArray(n) || n.length === 0) return (console.error("无效的帧延时数组"), !1);
+      if (!n || !Array.isArray(n) || n.length === 0)
+        return (console.error("无效的帧延时数组"), !1);
       if (!a || !Array.isArray(a) || a.length === 0)
         return (console.error("无效的RGB565数据数组"), !1);
-      const d = n.length,
+      const m = n.length,
         y = new Uint8Array(256).fill(255);
-      y[0] = d;
-      for (let D = 0; D < d - 1; D++) y[D + 1] = n[D] * 5;
-      d > 0 && (y[d] = 0);
-      const T = new Uint8Array([...y, ...a]),
-        m = i.connectType === "USB" ? await z(t.productId) : t;
-      if (!m) return (console.error("无法获取目标设备"), !1);
-      const g =
+      y[0] = m;
+      for (let D = 0; D < m - 1; D++) y[D + 1] = n[D] * 5;
+      m > 0 && (y[m] = 0);
+      const g = new Uint8Array([...y, ...a]),
+        d = i.connectType === "USB" ? await z(t.productId) : t;
+      if (!d) return (console.error("无法获取目标设备"), !1);
+      const T =
           (((f =
             (u =
               (l =
                 (s =
-                  (c = (e = m == null ? void 0 : m.collections) == null ? void 0 : e[0]) == null
+                  (c =
+                    (e = d == null ? void 0 : d.collections) == null
+                      ? void 0
+                      : e[0]) == null
                     ? void 0
                     : c.outputReports) == null
                   ? void 0
@@ -2163,12 +2438,12 @@ const V = 0,
               : u[0]) == null
             ? void 0
             : f.reportCount) || 4104) - 8,
-        h = Math.ceil(T.length / g);
+        h = Math.ceil(g.length / T);
       for (let D = 0; D < h; D++) {
-        const _ = new Uint8Array(g).fill(0),
-          S = D * g,
-          M = Math.min(S + g, T.length);
-        for (let I = S; I < M; I++) _[I - S] = T[I];
+        const _ = new Uint8Array(T).fill(0),
+          A = D * T,
+          M = Math.min(A + T, g.length);
+        for (let I = A; I < M; I++) _[I - A] = g[I];
         const L = new Uint8Array(8).fill(0);
         if (
           ((L[0] = 170),
@@ -2179,9 +2454,9 @@ const V = 0,
           (L[5] = (h >> 8) & 255),
           (L[6] = (6619136 / 4096) & 255),
           (L[7] = (6619136 / 4096) >> 8),
-          await C(m, {
+          await w(d, {
             cmd: E.SET_TFT_USER_ANIMATION,
-            contentSize: g,
+            contentSize: T,
             data: _,
             headerCount: L.length,
             customHeader: L,
@@ -2195,22 +2470,24 @@ const V = 0,
         }
       }
       return !0;
-    } catch (d) {
-      return (console.error("设置TFT用户动画失败:", d), !1);
+    } catch (m) {
+      return (console.error("设置TFT用户动画失败:", m), !1);
     }
   },
-  Ot = async (t, i, ...r) => {
+  vt = async (t, i, ...r) => {
     var o;
-    const n = (o = A.deviceStorage.deviceInfo) == null ? void 0 : o.frameVersion,
+    const n =
+        (o = S.deviceStorage.deviceInfo) == null ? void 0 : o.frameVersion,
       a = r[0];
     try {
-      if (typeof a != "number" || a < 0) return (console.error("无效的内置索引参数:", a), !1);
+      if (typeof a != "number" || a < 0)
+        return (console.error("无效的内置索引参数:", a), !1);
       const e = i.connectType === "USB" ? await z(t.productId) : t;
       if (!e) return (console.error("无法获取目标设备"), !1);
       const c = new Uint8Array(1).fill(0);
       return (
         (c[0] = a & 255),
-        await C(e, {
+        await w(e, {
           cmd: E.SET_TFT_BUILT_IN_INDEX,
           contentSize: 1,
           data: c,
@@ -2223,15 +2500,17 @@ const V = 0,
       return (console.error("设置TFT内置索引失败:", e), !1);
     }
   },
-  Nt = async (t, i, ...r) => {
+  Kt = async (t, i, ...r) => {
     var e;
-    const n = (e = A.deviceStorage.deviceInfo) == null ? void 0 : e.frameVersion,
+    const n =
+        (e = S.deviceStorage.deviceInfo) == null ? void 0 : e.frameVersion,
       a = r[0],
       o = r[1];
     try {
       const c = new Date(a);
       if (isNaN(c.getTime())) return (console.error("无效的时间格式:", a), !1);
-      if (o < 0 || o > 6) return (console.error("无效的星期参数，应为0-6:", o), !1);
+      if (o < 0 || o > 6)
+        return (console.error("无效的星期参数，应为0-6:", o), !1);
       const s = new Uint8Array(10).fill(0);
       return (
         (s[0] = 90),
@@ -2244,16 +2523,21 @@ const V = 0,
         (s[7] = c.getMinutes()),
         (s[8] = c.getSeconds()),
         (s[9] = o),
-        await C(t, { cmd: E.SET_TEMPORARY_COMMAND_DATA, data: s, timeout: n === 1 ? 2e3 : 500 }),
+        await w(t, {
+          cmd: E.SET_TEMPORARY_COMMAND_DATA,
+          data: s,
+          timeout: n === 1 ? 2e3 : 500,
+        }),
         !0
       );
     } catch (c) {
       return (console.error("设置TFT屏幕时间失败:", c), !1);
     }
   },
-  Kt = async (t, i, ...r) => {
-    var T;
-    const n = (T = A.deviceStorage.deviceInfo) == null ? void 0 : T.frameVersion,
+  Ut = async (t, i, ...r) => {
+    var g;
+    const n =
+        (g = S.deviceStorage.deviceInfo) == null ? void 0 : g.frameVersion,
       a = r[0] || {},
       {
         cpuUsage: o = 0,
@@ -2263,44 +2547,53 @@ const V = 0,
         currentTemp: l = 0,
         maxTemp: u = 0,
         minTemp: f = 0,
-        weather: d = 0,
+        weather: m = 0,
         humidity: y = 0,
       } = a;
     try {
-      if (o < 0 || o > 100) return (console.error("无效的CPU占用率，应为0-100:", o), !1);
-      if (e < -127 || e > 127) return (console.error("无效的CPU温度，应为-127到127:", e), !1);
-      if (c < 0 || c > 100) return (console.error("无效的GPU占用率，应为0-100:", c), !1);
-      if (s < -127 || s > 127) return (console.error("无效的GPU温度，应为-127到127:", s), !1);
-      if (l < -127 || l > 127) return (console.error("无效的当前气温，应为-127到127:", l), !1);
-      if (u < -127 || u > 127) return (console.error("无效的最高气温，应为-127到127:", u), !1);
-      if (f < -127 || f > 127) return (console.error("无效的最低气温，应为-127到127:", f), !1);
-      if (d < 0 || d > 23) return (console.error("无效的天气代码，应为0-23:", d), !1);
-      if (y < 0 || y > 100) return (console.error("无效的湿度，应为0-100:", y), !1);
-      const m = new Uint8Array(24).fill(0);
+      if (o < 0 || o > 100)
+        return (console.error("无效的CPU占用率，应为0-100:", o), !1);
+      if (e < -127 || e > 127)
+        return (console.error("无效的CPU温度，应为-127到127:", e), !1);
+      if (c < 0 || c > 100)
+        return (console.error("无效的GPU占用率，应为0-100:", c), !1);
+      if (s < -127 || s > 127)
+        return (console.error("无效的GPU温度，应为-127到127:", s), !1);
+      if (l < -127 || l > 127)
+        return (console.error("无效的当前气温，应为-127到127:", l), !1);
+      if (u < -127 || u > 127)
+        return (console.error("无效的最高气温，应为-127到127:", u), !1);
+      if (f < -127 || f > 127)
+        return (console.error("无效的最低气温，应为-127到127:", f), !1);
+      if (m < 0 || m > 23)
+        return (console.error("无效的天气代码，应为0-23:", m), !1);
+      if (y < 0 || y > 100)
+        return (console.error("无效的湿度，应为0-100:", y), !1);
+      const d = new Uint8Array(24).fill(0);
       return (
-        (m[6] = 90),
-        (m[12] = o),
-        (m[13] = e & 255),
-        (m[14] = c),
-        (m[15] = s & 255),
-        (m[16] = l & 255),
-        (m[17] = u & 255),
-        (m[18] = f & 255),
-        (m[19] = d),
-        (m[20] = y),
-        await C(t, {
+        (d[6] = 90),
+        (d[12] = o),
+        (d[13] = e & 255),
+        (d[14] = c),
+        (d[15] = s & 255),
+        (d[16] = l & 255),
+        (d[17] = u & 255),
+        (d[18] = f & 255),
+        (d[19] = m),
+        (d[20] = y),
+        await w(t, {
           cmd: E.SET_TEMPORARY_COMMAND_DATA,
-          data: m,
+          data: d,
           maxRetries: 0,
           timeout: n === 1 ? 2e3 : 500,
         }),
         !0
       );
-    } catch (m) {
-      return (console.error("设置TFT屏幕系统信息失败:", m), !1);
+    } catch (d) {
+      return (console.error("设置TFT屏幕系统信息失败:", d), !1);
     }
   },
-  vt = (t, i, r, n) => {
+  kt = (t, i, r, n) => {
     try {
       if (typeof r != "number" || r < 0)
         return (console.error("无效的设备状态类型:", r), { success: !1 });
@@ -2334,8 +2627,8 @@ const V = 0,
       return (console.error("启动设备状态监听失败:", a), { success: !1 });
     }
   },
-  C = async (t, i) => {
-    var _, S, M, L, I, w;
+  w = async (t, i) => {
+    var _, A, M, L, I, C;
     const {
         cmd: r,
         contentSize: n = 24,
@@ -2347,20 +2640,23 @@ const V = 0,
         otherHeader: l,
         customHeader: u,
         responseDevice: f = t,
-        responseCmd: d = r,
+        responseCmd: m = r,
         abortSignal: y,
-        isNeedLastPacketFlag: T = !0,
-        checkAddr: m = !1,
+        isNeedLastPacketFlag: g = !0,
+        checkAddr: d = !1,
       } = i,
       p = [],
-      g =
-        ((w =
+      T =
+        ((C =
           (I =
             (L =
               (M =
-                (S = (_ = t == null ? void 0 : t.collections) == null ? void 0 : _[0]) == null
+                (A =
+                  (_ = t == null ? void 0 : t.collections) == null
+                    ? void 0
+                    : _[0]) == null
                   ? void 0
-                  : S.outputReports) == null
+                  : A.outputReports) == null
                 ? void 0
                 : M[0]) == null
               ? void 0
@@ -2368,51 +2664,64 @@ const V = 0,
             ? void 0
             : I[0]) == null
           ? void 0
-          : w.reportCount) || 32,
-      h = g - s,
+          : C.reportCount) || 32,
+      h = T - s,
       D = Math.ceil(n / h);
     for (let O = 0; O < D; O++) {
       if (y != null && y.aborted) throw new Error("操作已中断");
-      const K = a + O * h,
+      const v = a + O * h,
         U = n - O * h,
-        x = T ? O === D - 1 : !1,
+        x = g ? O === D - 1 : !1,
         k = O === D - 1 ? U : h;
       let b;
       if (o) {
-        const F = O * h,
-          B = Math.min(F + h, o.length);
-        b = o.slice(F, B);
+        const V = O * h,
+          B = Math.min(V + h, o.length);
+        b = o.slice(V, B);
       }
-      const N = P(r, k, K, b, g, l, u, x);
+      const N = P(r, k, v, b, T, l, u, x);
       let G = 0,
         Y = null;
       for (; G <= c && !Y; ) {
         if (y != null && y.aborted) throw new Error("操作已中断");
         try {
-          const F = j(f, { command: d, timeout: e, addr: m ? K : void 0 }, (B) => B);
-          (await t.sendReport(V, N), (Y = await F));
-        } catch (F) {
+          const V = j(
+            f,
+            { command: m, timeout: e, addr: d ? v : void 0 },
+            (B) => B,
+          );
+          (await t.sendReport(F, N), (Y = await V));
+        } catch (V) {
           if (c === 0) return [];
           if ((G++, G <= c))
-            console.warn(`数据包0x${r.toString(16)}响应超时，正在进行第${G}次重发`);
+            console.warn(
+              `数据包0x${r.toString(16)}响应超时，正在进行第${G}次重发`,
+            );
           else {
             if (
-              (console.error(`数据包0x${r.toString(16)}响应超时，已重发${c}次仍无响应: ${F}`),
+              (console.error(
+                `数据包0x${r.toString(16)}响应超时，已重发${c}次仍无响应: ${V}`,
+              ),
               r === E.GET_DEFAULT_FN_KEY_MATRIX)
             )
               return Promise.reject([]);
             {
-              const { useWebHIDStore: B } = await v(
+              const { useWebHIDStore: B } = await K(
                   async () => {
                     const { useWebHIDStore: Ee } =
-                      await import("./layout-default-m1PKe3cP.js").then((he) => he.w);
+                      await import("./layout-default-CyiI7Opn.js").then(
+                        (he) => he.w,
+                      );
                     return { useWebHIDStore: Ee };
                   },
                   __vite__mapDeps([0, 1, 2, 3, 4]),
                 ),
                 $ = B(),
-                H = $.currentDeviceId;
-              (H && (await $.closeDevice(H), $.devices.delete(H), ($.historyConnect = {})),
+                X = $.currentDeviceId;
+              (X &&
+                (await $.closeDevice(X),
+                $.devices.delete(X),
+                ($.historyConnect = {})),
                 await t.forget());
             }
             return (
@@ -2438,11 +2747,17 @@ const V = 0,
       (s[4] = (r >> 8) & 255),
       o && Array.isArray(o))
     )
-      for (let l = 0; l < Math.min(o.length, 3); l++) o[l] !== void 0 && (s[5 + l] = o[l] & 255);
-    return ((!o || o.length < 2 || o[1] === void 0) && (s[6] = c ? 1 : 0), n && s.set(n, 8), s);
+      for (let l = 0; l < Math.min(o.length, 3); l++)
+        o[l] !== void 0 && (s[5 + l] = o[l] & 255);
+    return (
+      (!o || o.length < 2 || o[1] === void 0) && (s[6] = c ? 1 : 0),
+      n && s.set(n, 8),
+      s
+    );
   },
-  Pe = (t) => {
-    if (t[0] !== 85) return (console.error(`数据包头错误:0x${t[0].toString(16)}`), null);
+  xe = (t) => {
+    if (t[0] !== 85)
+      return (console.error(`数据包头错误:0x${t[0].toString(16)}`), null);
     const i = t[0],
       r = t[1],
       n = t[2],
@@ -2455,22 +2770,23 @@ const V = 0,
     return new Promise((e, c) => {
       let s = 0;
       const l = () => {
-        (t.removeEventListener("inputreport", u), s && (clearTimeout(s), (s = 0)));
+        (t.removeEventListener("inputreport", u),
+          s && (clearTimeout(s), (s = 0)));
       };
       s = oe(() => {
         (l(), c(new Error(`命令0x${n.toString(16)}响应超时`)));
       }, a);
       const u = (f) => {
-        const { data: d } = f,
-          y = new Uint8Array(d.buffer),
-          T = Pe(y);
-        if (!(!T || T.cmd !== n) && !(o !== void 0 && T.addr !== o)) {
+        const { data: m } = f,
+          y = new Uint8Array(m.buffer),
+          g = xe(y);
+        if (!(!g || g.cmd !== n) && !(o !== void 0 && g.addr !== o)) {
           l();
           try {
-            const m = r(y);
-            e(m);
-          } catch (m) {
-            c(m);
+            const d = r(y);
+            e(d);
+          } catch (d) {
+            c(d);
           }
         }
       };
@@ -2488,58 +2804,60 @@ const V = 0,
 export {
   E as CMD,
   pe as FACTORY_RESET_TYPE,
-  st as clearCalibration,
-  Lt as clearLedData,
-  He as deviceInit,
+  ct as clearCalibration,
+  wt as clearLedData,
+  qe as deviceInit,
   Ae as factoryReset,
-  gt as getAllLightsRGB,
-  pt as getAllLightsRGB24G,
-  St as getAllLightsRGB24G64Byte,
+  St as getAllLightsRGB,
+  At as getAllLightsRGB24G,
+  Et as getAllLightsRGB24G64Byte,
   ke as getCustomLEDData,
-  Ke as getDefaultFnKeyMatrix,
+  ve as getDefaultFnKeyMatrix,
   Ce as getDeviceInfo,
-  ve as getFnKeyData,
-  ut as getFnSingleKeyData,
+  Ke as getFnKeyData,
+  ft as getFnSingleKeyData,
   Re as getGameMode,
   Ne as getKeyData,
   Ue as getLEDEffect,
   be as getLightBox,
-  Ge as getMacroData,
-  Ve as getMagneticAxisDKSData,
+  Ve as getMacroData,
+  Pe as getMagneticAxisDKSData,
   Fe as getMagneticAxisRT,
-  ot as getMagneticAxisStatus,
-  it as getSingleKeyData,
-  C as readDataChunks,
-  ct as resetAll,
-  dt as setCustomLEDData,
-  At as setDotMatrixMode,
-  ft as setFnKeyData,
-  qe as setGameMode,
-  Et as setGifLighting,
-  lt as setKeyData,
+  nt as getMagneticAxisStatus,
+  Ge as getSideLight,
+  lt as getSingleKeyData,
+  w as readDataChunks,
+  it as resetAll,
+  yt as setCustomLEDData,
+  ht as setDotMatrixMode,
+  dt as setFnKeyData,
+  Je as setGameMode,
+  Dt as setGifLighting,
+  ut as setKeyData,
   mt as setLEDEffect,
-  Ct as setLedDateTime,
-  Mt as setLedSyncAnimation,
-  wt as setLedUserAnimation,
-  yt as setLightBox,
-  ht as setMacroData,
-  It as setMagneticAxisDKSData,
-  Dt as setMagneticAxisRT,
-  Tt as setMusicData,
-  _t as setMusicDataV1,
-  Ot as setTftBuiltInIndex,
-  Nt as setTftDateTime,
-  Kt as setTftScreenInfo,
-  Rt as setTftUserAnimation,
-  Je as start24GDisconnectListener,
-  Ze as start24GSleepListener,
-  je as start24GWakeListener,
-  Qe as startCalibration,
-  tt as startCalibrationV2,
-  vt as startDeviceStateListener,
-  We as startResetListener,
-  nt as startSimulationTest,
-  et as stopCalibration,
-  rt as stopCalibrationV2,
-  at as stopSimulationTest,
+  Ot as setLedDateTime,
+  Ct as setLedSyncAnimation,
+  Rt as setLedUserAnimation,
+  gt as setLightBox,
+  It as setMacroData,
+  Mt as setMagneticAxisDKSData,
+  Lt as setMagneticAxisRT,
+  _t as setMusicData,
+  pt as setMusicDataV1,
+  Tt as setSideLight,
+  vt as setTftBuiltInIndex,
+  Kt as setTftDateTime,
+  Ut as setTftScreenInfo,
+  Nt as setTftUserAnimation,
+  We as start24GDisconnectListener,
+  je as start24GSleepListener,
+  Qe as start24GWakeListener,
+  et as startCalibration,
+  rt as startCalibrationV2,
+  kt as startDeviceStateListener,
+  Ze as startResetListener,
+  at as startSimulationTest,
+  tt as stopCalibration,
+  ot as stopCalibrationV2,
+  st as stopSimulationTest,
 };

@@ -85,33 +85,38 @@ npm run extract:models # перегенерировать models.ts + models.jso
 
 Пере-выводить после каждой пересборки апстрима — имена меняются.
 
+Актуально для бандла из `artifact-260604-0728`.
+
 | Мин | Имя | | Мин | Имя |
 |-----|-----|-|-----|-----|
-| `E` | `CMD` (enum опкодов) | | `C` | `readDataChunks` (транспорт) |
+| `E` | `CMD` (enum опкодов) | | `w` | `readDataChunks` (транспорт) |
 | `pe` | `FACTORY_RESET_TYPE` | | `P` | сборщик пакета (внутр.) |
-| `He` | `deviceInit` | | `Pe` | парсер ответа (внутр.) |
+| `qe` | `deviceInit` | | `xe` | парсер ответа (внутр.) |
 | `Ce` | `getDeviceInfo` | | `j` | матчер ответа (внутр.) |
 | `Re` | `getGameMode` | | `z` | открытие устройства (внутр.) |
-| `Ne` | `getKeyData` | | `qe` | `setGameMode` |
-| `Ue` | `getLEDEffect` | | `lt` | `setKeyData` |
+| `Ne` | `getKeyData` | | `Je` | `setGameMode` |
+| `Ue` | `getLEDEffect` | | `ut` | `setKeyData` |
 | `ke` | `getCustomLEDData` | | `mt` | `setLEDEffect` |
-| `be` | `getLightBox` | | `dt` | `setCustomLEDData` |
-| `Ge` | `getMacroData` | | `yt` | `setLightBox` |
-| `Fe` | `getMagneticAxisRT` | | `ht` | `setMacroData` |
-| `Ve` | `getMagneticAxisDKSData` | | `Dt` | `setMagneticAxisRT` |
-| `ve` | `getFnKeyData` | | `It` | `setMagneticAxisDKSData` |
-| `Ke` | `getDefaultFnKeyMatrix` | | `ft` | `setFnKeyData` |
-| `it` | `getSingleKeyData` | | `Ae` | `factoryReset` |
-| `ut` | `getFnSingleKeyData` | | `ct` | `resetAll` |
-| `ot` | `getMagneticAxisStatus` | | `st` | `clearCalibration` |
-| `gt`/`pt`/`St` | `getAllLightsRGB[24G][64Byte]` | | `Lt` | `clearLedData` |
-| `Qe`/`tt` | `startCalibration[V2]` | | `Tt`/`_t` | `setMusicData[V1]` |
-| `et`/`rt` | `stopCalibration[V2]` | | `Et` | `setGifLighting` |
-| `nt`/`at` | `start/stopSimulationTest` | | `At` | `setDotMatrixMode` |
-| `We` | `startResetListener` | | `Mt` | `setLedSyncAnimation` |
-| `vt` | `startDeviceStateListener` | | `wt` | `setLedUserAnimation` |
-| `Je`/`Ze`/`je` | слушатели 24G disconnect/sleep/wake | | `Ct` | `setLedDateTime` |
-| | | | `Ot`/`Nt`/`Kt`/`Rt` | `setTft*` (builtIn/dateTime/screenInfo/userAnimation) |
+| `be` | `getLightBox` | | `yt` | `setCustomLEDData` |
+| `Ge` | `getSideLight` ⭑ | | `gt` | `setLightBox` |
+| `Ve` | `getMacroData` | | `Tt` | `setSideLight` ⭑ |
+| `Fe` | `getMagneticAxisRT` | | `It` | `setMacroData` |
+| `Pe` | `getMagneticAxisDKSData` | | `Lt` | `setMagneticAxisRT` |
+| `Ke` | `getFnKeyData` | | `Mt` | `setMagneticAxisDKSData` |
+| `ve` | `getDefaultFnKeyMatrix` | | `dt` | `setFnKeyData` |
+| `lt` | `getSingleKeyData` | | `Ae` | `factoryReset` |
+| `ft` | `getFnSingleKeyData` | | `it` | `resetAll` |
+| `nt` | `getMagneticAxisStatus` | | `ct` | `clearCalibration` |
+| `St`/`At`/`Et` | `getAllLightsRGB[24G][64Byte]` | | `wt` | `clearLedData` |
+| `et`/`rt` | `startCalibration[V2]` | | `_t`/`pt` | `setMusicData[V1]` |
+| `tt`/`ot` | `stopCalibration[V2]` | | `Dt` | `setGifLighting` |
+| `at`/`st` | `start/stopSimulationTest` | | `ht` | `setDotMatrixMode` |
+| `Ze` | `startResetListener` | | `Ct` | `setLedSyncAnimation` |
+| `kt` | `startDeviceStateListener` | | `Rt` | `setLedUserAnimation` |
+| `We`/`je`/`Qe` | слушатели 24G disconnect/sleep/wake | | `Ot` | `setLedDateTime` |
+| | | | `vt`/`Kt`/`Ut`/`Nt` | `setTft*` (builtIn/dateTime/screenInfo/userAnimation) |
+
+⭑ — новое в апстриме (боковая подсветка, `GET_SIDE_LIGHT`=29 / `SET_SIDE_LIGHT`=45).
 
 ## Статус
 
