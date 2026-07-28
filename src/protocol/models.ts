@@ -19,6 +19,23 @@ export interface KeyboardModel {
 export const KEYBOARD_MODELS: KeyboardModel[] = [
   {
     "vendorId": 3141,
+    "productId": 32774,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "USB",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "both",
+    "deviceMode": 0
+  },
+  {
+    "vendorId": 3141,
     "productId": 32777,
     "name": "AK980 PRO",
     "supplierName": "ajazz",
@@ -32,6 +49,57 @@ export const KEYBOARD_MODELS: KeyboardModel[] = [
     ],
     "keyboardImg": "AK980_PRO.png",
     "driverSource": "both"
+  },
+  {
+    "vendorId": 3141,
+    "productId": 32790,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "2.4G",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "both",
+    "deviceMode": 0
+  },
+  {
+    "vendorId": 3141,
+    "productId": 32835,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "USB",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "both",
+    "deviceMode": 0
+  },
+  {
+    "vendorId": 3141,
+    "productId": 32839,
+    "name": "AK980 PRO",
+    "supplierName": "ajazz",
+    "connectType": "2.4G",
+    "routesName": [
+      "customKeys",
+      "lighting",
+      "macro",
+      "tft",
+      "settings"
+    ],
+    "keyboardImg": "AK980_PRO.png",
+    "driverSource": "both",
+    "deviceMode": 0
   },
   {
     "vendorId": 3141,
@@ -717,74 +785,6 @@ export const KEYBOARD_MODELS: KeyboardModel[] = [
     ],
     "keyboardImg": "qs87.png",
     "driverSource": "driveall"
-  },
-  {
-    "vendorId": 3141,
-    "productId": 32774,
-    "name": "AK980 PRO",
-    "supplierName": "ajazz",
-    "connectType": "USB",
-    "routesName": [
-      "customKeys",
-      "lighting",
-      "macro",
-      "tft",
-      "settings"
-    ],
-    "keyboardImg": "AK980_PRO.png",
-    "driverSource": "hub",
-    "deviceMode": 0
-  },
-  {
-    "vendorId": 3141,
-    "productId": 32790,
-    "name": "AK980 PRO",
-    "supplierName": "ajazz",
-    "connectType": "2.4G",
-    "routesName": [
-      "customKeys",
-      "lighting",
-      "macro",
-      "tft",
-      "settings"
-    ],
-    "keyboardImg": "AK980_PRO.png",
-    "driverSource": "hub",
-    "deviceMode": 0
-  },
-  {
-    "vendorId": 3141,
-    "productId": 32835,
-    "name": "AK980 PRO",
-    "supplierName": "ajazz",
-    "connectType": "USB",
-    "routesName": [
-      "customKeys",
-      "lighting",
-      "macro",
-      "tft",
-      "settings"
-    ],
-    "keyboardImg": "AK980_PRO.png",
-    "driverSource": "hub",
-    "deviceMode": 0
-  },
-  {
-    "vendorId": 3141,
-    "productId": 32839,
-    "name": "AK980 PRO",
-    "supplierName": "ajazz",
-    "connectType": "2.4G",
-    "routesName": [
-      "customKeys",
-      "lighting",
-      "macro",
-      "tft",
-      "settings"
-    ],
-    "keyboardImg": "AK980_PRO.png",
-    "driverSource": "hub",
-    "deviceMode": 0
   }
 ];
 
